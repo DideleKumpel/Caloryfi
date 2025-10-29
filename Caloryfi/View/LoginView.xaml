@@ -18,7 +18,7 @@
                     <Label Style="{StaticResource Big}"  Text="Caloryfi" HorizontalOptions="Center" FontAttributes="Bold"/>
                     <Label Style="{StaticResource Header}" Text="Log in" HorizontalOptions="Center" FontAttributes="Bold" />
                     <Border Padding="5" Margin="0,0,0,20"
-                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                     Background="{StaticResource BackgroundColor}">
                         <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
                            Text="{Binding EmailInput}" TextColor="{StaticResource TextColor}" FontSize="16"
@@ -27,7 +27,7 @@
                     </Border>
 
                     <Border Padding="5"
-                        Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                        Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                         Background="{StaticResource BackgroundColor}">
                         <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
                             Text="{Binding PasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"

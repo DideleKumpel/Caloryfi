@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Caloryfi.View;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using System;
@@ -64,7 +65,7 @@ namespace Caloryfi.ViewModel
         [RelayCommand]
         public void SwitchToRegisterPage()
         {
-            //Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterView>();
+            Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterAccountView>();
         }
 
         public LoginViewModel(/*AuthentitacionService authservice,*/ IServiceProvider serviceProvider)
