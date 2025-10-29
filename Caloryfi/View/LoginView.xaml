@@ -10,7 +10,7 @@
             <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
                 <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">
                     <Image
-                    Source=""
+                    Source="apple.png"
                     HeightRequest="180"
                     Aspect="AspectFit"
                     Margin="0"
