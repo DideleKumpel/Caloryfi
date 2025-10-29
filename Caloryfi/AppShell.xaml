@@ -4,11 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Caloryfi"
+    xmlns:views="clr-namespace:Caloryfi.View"
+    xmlns:yourday="clr-namespace:Caloryfi.View.YourDayViews"
+    xmlns:history="clr-namespace:Caloryfi.View.HistoryViews"
+    xmlns:profile="clr-namespace:Caloryfi.View.ProfileViews"
     Title="Caloryfi">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="YOUR DAY" Icon="calendar.png">
+            <ShellContent ContentTemplate="{DataTemplate history:HistoryView}"/>
+        </Tab>
+        <Tab Title="Workouts" Icon="fork.png">
+            <ShellContent ContentTemplate="{DataTemplate yourday:YourDayView}"/>
+        </Tab>
+        <Tab Title="Profile" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate profile:ProfileView}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

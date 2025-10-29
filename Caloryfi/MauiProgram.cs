@@ -45,6 +45,9 @@ namespace Caloryfi
             //VIEW
             builder.Services.AddTransient<View.LoginView>();
             builder.Services.AddTransient<View.RegisterAccountView>();
+            builder.Services.AddTransient<View.HistoryViews.HistoryView>();
+            builder.Services.AddTransient<View.ProfileViews.ProfileView>();
+            builder.Services.AddTransient<View.YourDayViews.YourDayView>();
 
             //VIEWMODEL
             builder.Services.AddTransient<ViewModel.LoginViewModel>();

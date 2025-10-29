@@ -70,6 +70,9 @@
 	<ItemGroup>
 	  <Folder Include="Model\" />
 	  <Folder Include="Service\" />
+	  <Folder Include="ViewModel\HistoryViewModels\" />
+	  <Folder Include="ViewModel\ProfileViewModels\" />
+	  <Folder Include="ViewModel\YourDayViewModels\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,10 +82,19 @@
 	  <MauiXaml Update="Resources\Styles\StylesCaloryfi.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\HistoryViews\HistoryView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\ProfileViews\ProfileView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\RegisterAccountView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\YourDayViews\YourDayView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
