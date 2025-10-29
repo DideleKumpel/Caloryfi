@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Caloryfi.View.LoginView"
+             xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel"
+             x:DataType="viewmodel:LoginViewModel"
+             Background="{StaticResource BackgroundColor}"
+             Title="LoginView">
+        <Grid>
+            <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
+                <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">
+                    <Image
+                    Source=""
+                    HeightRequest="180"
+                    Aspect="AspectFit"
+                    Margin="0"
+                    />
+                    <Label Style="{StaticResource Big}"  Text="Caloryfi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                    <Label Style="{StaticResource Header}" Text="Log in" HorizontalOptions="Center" FontAttributes="Bold" />
+                    <Border Padding="5" Margin="0,0,0,20"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                    Background="{StaticResource BackgroundColor}">
+                        <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
+                           Text="{Binding EmailInput}" TextColor="{StaticResource TextColor}" FontSize="16"
+                           Keyboard="Email"
+                        />
+                    </Border>
+
+                    <Border Padding="5"
+                        Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                        Background="{StaticResource BackgroundColor}">
+                        <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
+                            Text="{Binding PasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+                        />
+                    </Border>
+
+                    <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" />
+
+                    <Button Style="{StaticResource WhiteBtn}" Text="Log in"  HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
+
+                    <Button Style="{StaticResource TextBtn}" Text="Don’t have account?  Register here." HorizontalOptions="Center" Command="{Binding SwitchToRegisterPageCommand}"/>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Loading screen !-->
+            <Border BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+                <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+            </Border>
+        </Grid>
+
+
+
+    </ContentPage>

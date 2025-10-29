@@ -43,8 +43,12 @@ namespace Caloryfi
             //SERVICE REGISTRATIONS
 
             //VIEW
+            builder.Services.AddTransient<View.LoginView>();
+
 
             //VIEWMODEL
+            builder.Services.AddTransient<ViewModel.LoginViewModel>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();
