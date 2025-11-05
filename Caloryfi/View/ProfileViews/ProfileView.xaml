@@ -2,11 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Caloryfi.View.ProfileViews.ProfileView"
+             xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel"
+             Background="{StaticResource BackgroundColor}"
              Title="ProfileView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Profile placeholder"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Label Text="WEIGHT GRAPH" Style="{StaticResource Header}" HorizontalOptions="Center" />
+
+            <Border Stroke="{StaticResource TextColor}"
+                    StrokeThickness="3"
+                    HeightRequest="250"
+                    HorizontalOptions="Fill">
+                <Label Text="*GRAPH HERE*" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{StaticResource TextColor}" />
+            </Border>
+
+            <Label Text="ACTUAL WEIGHT" Style="{StaticResource Big}" FontAttributes="Bold" />
+
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+
+                <Border Padding="8" Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8" Background="{StaticResource BackgroundColor}" VerticalOptions="Center" HeightRequest="56"  WidthRequest="140">
+
+                    <Label Text="{Binding CurrentWeight, StringFormat='{0} kg'}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextColor}" FontAttributes="Bold" />
+                    
+                </Border>
+
+                <Button Text="UPDATE" Style="{StaticResource MainButton}" Command="{Binding UpdateWeightCommand}" HeightRequest="56" WidthRequest="140" FontSize="17" />
+                
+            </HorizontalStackLayout>
+
+            <Button Text="SETTINGS" Style="{StaticResource MainButton}" Command="{Binding GoToSettingsCommand}" HorizontalOptions="Fill" Margin="0,8,0,0"/>
+
+            <Button Text="LOG OUT" Style="{StaticResource DangerButton}" Command="{Binding LogoutCommand}" HorizontalOptions="Fill" Margin="0,8,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
