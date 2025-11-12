@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RadioButton 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Caloryfi.Converters"
+    x:Class="Caloryfi.CustomControls.MainRadioButton">
+    <RadioButton.Resources>
+        <converters:BooleanToColorConverter 
+            x:Key="BooleanToColorConverterBackGround"
+            TrueColor="{StaticResource PrimaryColor}"
+            FalseColor="{StaticResource BackgroundColor}"
+            />
+        <converters:BooleanToColorConverter 
+            x:Key="BooleanToColorConverterText"
+            TrueColor="{StaticResource SecondaryTextColor}"
+            FalseColor="{StaticResource SecondaryColor}"
+            />
+    </RadioButton.Resources>
+    <RadioButton.ControlTemplate>
+        <ControlTemplate>
+            <Border 
+                StrokeShape="RoundRectangle 30" 
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeThickness="4"
+                BackgroundColor="{ TemplateBinding IsChecked, Converter={StaticResource BooleanToColorConverterBackGround}}"
+                HeightRequest="70">
+                <Label 
+                    Text="{TemplateBinding Content}" 
+                    TextColor="{ TemplateBinding IsChecked, Converter={StaticResource BooleanToColorConverterText}}"
+                    FontSize="20"
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center"
+
+                    FontAttributes="Bold"
+                    />
+
+            </Border>
+        </ControlTemplate>
+    </RadioButton.ControlTemplate>
+</RadioButton>

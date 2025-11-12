@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Caloryfi.View.ProfileViews.SettingsView"
+             xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.ProfileViewModels"
+             xmlns:customcontrols="clr-namespace:Caloryfi.CustomControls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodel:SettingsViewModel"
+             Title="SettingsView">
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="15">
+            <Label Style="{StaticResource Header}"
+            Text="Username"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Username" PlaceholderColor="{StaticResource TextColor}"
+                Text="{Binding UserInfo.Username}" TextColor="{StaticResource TextColor}" FontSize="16"
+            />
+            </Border>
+            <Label Style="{StaticResource Header}"
+            Text="E-mail"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
+                Text="{Binding UserInfo.Email}" TextColor="{StaticResource TextColor}" FontSize="16"
+            />
+            </Border>
+            <Label Style="{StaticResource Header}"
+            Text="Password"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
+                Text="{Binding PasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+               />
+            </Border>
+
+            <Label Style="{StaticResource Header}"
+                Text="Repeat password"/>
+            <Border Padding="5" Margin="0,0,0,20"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Repeat password" PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding RepeatPasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+                />
+            </Border>
+
+            <Grid x:Name="SexSelectGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource Header}" Text="Sex:" Grid.ColumnSpan="2"/>
+                <customcontrols:MainRadioButton Grid.Row="1"
+                            Margin="0,10" 
+                            GroupName="SexSelector"
+                            Content="MALE"
+                            Value="0"
+                            IsChecked="{Binding SexInput}">
+
+                    <customcontrols:MainRadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                EventName="CheckedChanged"
+                Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
+                CommandParameter="2"/>
+                    </customcontrols:MainRadioButton.Behaviors>
+                </customcontrols:MainRadioButton>
+
+                <customcontrols:MainRadioButton Grid.Column="1" Grid.Row="1"
+                Margin="0,10" 
+                GroupName="SexSelector"
+                Content="FEMALE"
+                Value="1"
+                IsChecked="{Binding }">
+                    <customcontrols:MainRadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                    EventName="CheckedChanged"
+                    Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
+                    CommandParameter="1"/>
+                    </customcontrols:MainRadioButton.Behaviors>
+                </customcontrols:MainRadioButton>
+            </Grid>
+
+            <Label Style="{StaticResource Headline}" Text="Calories" VerticalOptions="Center"/>
+            <Label Style="{StaticResource Header}"
+            Text="Number of meals"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Number of meals" PlaceholderColor="{StaticResource TextColor}"
+                Text="{Binding NumberOfMealsInput}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric" 
+            />
+            </Border>
+
+            <Label Style="{StaticResource Header}"
+            Text="Diet goal"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Picker  TextColor="{StaticResource TextColor}" FontSize="16" ItemsSource="{Binding DietGoalsPickerList}" SelectedIndex="{Binding SelectedDietGoal}"
+                 />
+            </Border>
+
+            <Label Style="{StaticResource Header}"
+            Text="Lvl of phisical activity"/>
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
+                <Picker TextColor="{StaticResource TextColor}" FontSize="16" ItemsSource="{Binding LvlsOfActivityPickerList}" SelectedIndex="{Binding SelectedActivityLvl}"
+            />
+            </Border>
+
+            <Button Style="{StaticResource MainButton}"
+                Text="AUTO CALCULATE MAKRO" />
+
+            <Label Style="{StaticResource Header}"
+                Text="Kcal"/>
+            <Border Padding="5" Margin="0,0,0,20"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Kcal" PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding KcalInput}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+                />
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Style="{StaticResource Header}" 
+                    Text="Protein"/>
+                <Label Style="{StaticResource Header}" Grid.Column="1"
+                    Text="GRAMS" HorizontalOptions="CenterAndExpand"/>
+                <Border Padding="5" Margin="0,0,0,20" Grid.Row="1"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Background="{StaticResource BackgroundColor}">
+                    <Entry PlaceholderColor="{StaticResource TextColor}"
+                        Text="{Binding ProteinProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+                />
+                </Border>
+                <Label Style="{StaticResource Header}" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding ProteinNum}"/>
+
+                <Label Style="{StaticResource Header}" Grid.RowSpan="2" Grid.Row="2"
+                    Text="Carbs"/>
+                <Border Padding="5" Margin="0,0,0,20" Grid.Row="3"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Background="{StaticResource BackgroundColor}">
+                    <Entry PlaceholderColor="{StaticResource TextColor}"
+                        Text="{Binding CarbsProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+/>
+                </Border>
+                <Label Style="{StaticResource Header}" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding CarbsNum}"/>
+
+                <Label Style="{StaticResource Header}" Grid.RowSpan="2" Grid.Row="4"
+                    Text="Fats"/>
+                <Border Padding="5" Margin="0,0,0,20" Grid.Row="5"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Background="{StaticResource BackgroundColor}">
+                    <Entry PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding FatsProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+/>
+                </Border>
+                <Label Style="{StaticResource Header}" Grid.Row="5" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                Text="{Binding FatsNum}"/>
+
+            </Grid>
+
+            <Button Style="{StaticResource DangerButton}"
+                    Text="Save"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -23,6 +23,10 @@ namespace Caloryfi.ViewModel
         [ObservableProperty]
         public string _passwordRepeatInput;
         [ObservableProperty]
+        public int _weightInput;
+        [ObservableProperty]
+        public int _sexInput = 0; //0=male, 1=female
+        [ObservableProperty]
         public string _errorMessage;
         [ObservableProperty]
         public string _succesMessage;
@@ -36,7 +40,7 @@ namespace Caloryfi.ViewModel
         }
 
         [RelayCommand]
-        public async Task RegisterAccount()
+        private async Task RegisterAccount()
         {
             LoadingIsVisible = true;
             SuccesMessage = "";
@@ -44,6 +48,12 @@ namespace Caloryfi.ViewModel
             if (PasswordInput != PasswordRepeatInput)
             {
                 ErrorMessage = "Password are not the same.";
+                LoadingIsVisible = false;
+                return;
+            }
+            if (WeightInput < 1)
+            {
+                ErrorMessage = "Weight must be greater than 0";
                 LoadingIsVisible = false;
                 return;
             }
@@ -64,6 +74,22 @@ namespace Caloryfi.ViewModel
             ErrorMessage = "";
             _serviceProvider = serviceProvider;
             //_userService = userService;
+        }
+
+        [RelayCommand]
+        private void SexChange(string ChosenChanged)
+        {
+            if (ChosenChanged == null) {
+                return;
+            }
+            if(ChosenChanged == "1")
+            {
+                SexInput = 1;
+            }
+            else
+            {
+                SexInput = 0;
+            }
         }
     }
 }

@@ -48,11 +48,12 @@ namespace Caloryfi
             builder.Services.AddTransient<View.HistoryViews.HistoryView>();
             builder.Services.AddTransient<View.ProfileViews.ProfileView>();
             builder.Services.AddTransient<View.YourDayViews.YourDayView>();
+            builder.Services.AddTransient<View.ProfileViews.SettingsView>();
 
             //VIEWMODEL
             builder.Services.AddTransient<ViewModel.LoginViewModel>();
             builder.Services.AddTransient<ViewModel.RegisterAccountViewModel>();
-
+            builder.Services.AddTransient<ViewModel.ProfileViewModels.SettingsViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

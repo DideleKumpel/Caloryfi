@@ -4,6 +4,8 @@
              x:Class="Caloryfi.View.RegisterAccountView" 
              xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel"
              x:DataType="viewmodel:RegisterAccountViewModel"
+             xmlns:customcontrols="clr-namespace:Caloryfi.CustomControls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Background="{StaticResource BackgroundColor}"
              Title="RegisterAccountView">
 
@@ -53,6 +55,55 @@
                     Text="{Binding PasswordRepeatInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
                     />
                 </Border>
+
+                <Border Padding="5" 
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Background="{StaticResource BackgroundColor}">
+                    <Entry Placeholder="Weight (kg)" PlaceholderColor="{StaticResource TextColor}" Keyboard="Numeric"
+                        Text="{Binding WeightInput}" TextColor="{StaticResource TextColor}" FontSize="16"
+                    />
+                </Border>
+
+                
+                <Grid x:Name="SexSelectGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Style="{StaticResource Medium}" Text="Sex:" Grid.ColumnSpan="2"/>
+                    <customcontrols:MainRadioButton Grid.Row="1"
+                                            Margin="0,10" 
+                                            GroupName="SexSelector"
+                                            Content="MALE"
+                                            Value="0"
+                                            IsChecked="True">
+
+                        <customcontrols:MainRadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                EventName="CheckedChanged"
+                                Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
+                                CommandParameter="2"/>
+                        </customcontrols:MainRadioButton.Behaviors>
+                    </customcontrols:MainRadioButton>
+
+                    <customcontrols:MainRadioButton Grid.Column="1" Grid.Row="1"
+                        Margin="0,10" 
+                        GroupName="SexSelector"
+                        Content="FEMALE"
+                        Value="1">
+
+                        <customcontrols:MainRadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                            EventName="CheckedChanged"
+                            Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
+                            CommandParameter="1"/>
+                        </customcontrols:MainRadioButton.Behaviors>
+                    </customcontrols:MainRadioButton>
+                </Grid>
 
                 <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" />
 
