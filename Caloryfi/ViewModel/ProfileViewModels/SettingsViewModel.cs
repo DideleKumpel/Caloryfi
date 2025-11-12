@@ -60,5 +60,22 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         private async Task SaveSettings()
         {
         }
+
+        [RelayCommand]
+        private void SexChange(string ChosenChanged)
+        {
+            if (ChosenChanged == null)
+            {
+                return;
+            }
+            if (ChosenChanged == "1")
+            {
+                SexInput = true;
+            }
+            else
+            {
+                SexInput = false;
+            }
+        }
     }
 }

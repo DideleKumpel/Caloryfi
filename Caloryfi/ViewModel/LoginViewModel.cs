@@ -1,4 +1,5 @@
-﻿using Caloryfi.View;
+﻿using Caloryfi.Service;
+using Caloryfi.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -13,7 +14,7 @@ namespace Caloryfi.ViewModel
     public partial class LoginViewModel: ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        //private readonly AuthentitacionService _authentitacionService;
+        private readonly UserService _userService;
 
         [ObservableProperty]
         public string _emailInput;
@@ -44,14 +45,21 @@ namespace Caloryfi.ViewModel
             }
             try
             {
-                //var result = await _authentitacionService.GetAuthorizationAsync(EmailInput, PasswordInput);
-                //if (!result.success)
-                //{
-                //    ErrorMessage = result.message;
-                //    PasswordInput = "";
-                //    LoadingIsVisible = false;
-                //    return;
-                //}
+                var result = await _userService.LogInAsync(EmailInput, PasswordInput);
+                if (!result.success)
+                {
+                    ErrorMessage = result.message;
+                    PasswordInput = "";
+                    LoadingIsVisible = false;
+                    return;
+                }
+                var UserDataResult = await _userService.GetUserInfoAsync();
+                if (!UserDataResult)
+                {
+                    ErrorMessage = "Can't download userdata";
+                    LoadingIsVisible = false;
+                    return;
+                }
                 Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
             }
             catch
@@ -68,10 +76,10 @@ namespace Caloryfi.ViewModel
             Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterAccountView>();
         }
 
-        public LoginViewModel(/*AuthentitacionService authservice,*/ IServiceProvider serviceProvider)
+        public LoginViewModel(UserService userService, IServiceProvider serviceProvider)
         {
             ErrorMessage = "";
-            //_authentitacionService = authservice;
+            _userService = userService;
             _serviceProvider = serviceProvider;
             _loadingIsVisible = false;
             TryToLogIn();
@@ -88,11 +96,11 @@ namespace Caloryfi.ViewModel
                     LoadingIsVisible = false;
                     return;
                 }
-                //bool succes = await _authentitacionService.RefreshToken(token);
-                //if (succes)
-                //{
-                //    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
-                //}
+                bool succes = await _userService.RefreshToken(token);
+                if (succes)
+                {
+                    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
+                }
             }
             catch { }
             LoadingIsVisible = false;

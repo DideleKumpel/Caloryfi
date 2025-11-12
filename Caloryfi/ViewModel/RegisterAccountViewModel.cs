@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caloryfi.Service;
 
 namespace Caloryfi.ViewModel
 {
     public partial class RegisterAccountViewModel : ObservableObject
     {
         private readonly IServiceProvider _serviceProvider;
-        //private readonly UserService _userService;
+        private readonly UserService _userService;
 
         [ObservableProperty]
         public string _nicknameInput;
@@ -25,7 +26,7 @@ namespace Caloryfi.ViewModel
         [ObservableProperty]
         public int _weightInput;
         [ObservableProperty]
-        public int _sexInput = 0; //0=male, 1=female
+        public bool _sexInput = false; //0=male, 1=female
         [ObservableProperty]
         public string _errorMessage;
         [ObservableProperty]
@@ -58,22 +59,22 @@ namespace Caloryfi.ViewModel
                 return;
             }
             //Rest validation is API site
-            //var response = await _userService.CreateAccountAsync(NicknameInput, EmailInput, PasswordInput);
-            //if (response.success)
-            //{
-            //    ErrorMessage = response.message;
-            //    SuccesMessage = "Account has been created go to login page";
-            //}
-            //ErrorMessage = response.message;
+            var response = await _userService.CreateAccountAsync(NicknameInput, EmailInput, PasswordInput, WeightInput, SexInput);
+            if (response.success)
+            {
+                ErrorMessage = response.message;
+                SuccesMessage = "Account has been created go to login page";
+            }
+            ErrorMessage = response.message;
             LoadingIsVisible = false;
         }
 
-        public RegisterAccountViewModel(IServiceProvider serviceProvider /*, UserService userService*/)
+        public RegisterAccountViewModel(IServiceProvider serviceProvider, UserService userService)
         {
             _loadingIsVisible = false;
             ErrorMessage = "";
             _serviceProvider = serviceProvider;
-            //_userService = userService;
+            _userService = userService;
         }
 
         [RelayCommand]
@@ -84,11 +85,11 @@ namespace Caloryfi.ViewModel
             }
             if(ChosenChanged == "1")
             {
-                SexInput = 1;
+                SexInput = true;
             }
             else
             {
-                SexInput = 0;
+                SexInput = false;
             }
         }
     }

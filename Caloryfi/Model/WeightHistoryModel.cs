@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Caloryfi.Model
 {
-    class WeightHistoryModel
+    public class WeightHistoryModel
     {
         public int Id { get; set; }
         public int UserId { get; set; }
