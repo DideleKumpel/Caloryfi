@@ -42,6 +42,7 @@ namespace Caloryfi
 
             //SERVICE REGISTRATIONS
             builder.Services.AddSingleton<Service.UserService>();
+            builder.Services.AddSingleton<Service.UserSettingsService>();
 
             //VIEW
             builder.Services.AddTransient<View.LoginView>();
