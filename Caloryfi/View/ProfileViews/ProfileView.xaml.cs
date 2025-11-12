@@ -1,9 +1,12 @@
+using Caloryfi.ViewModel.ProfileViewModels;
+
 namespace Caloryfi.View.ProfileViews;
 
 public partial class ProfileView : ContentPage
 {
-	public ProfileView()
+	public ProfileView(ProfileViewModel vs)
 	{
-		InitializeComponent();
+		BindingContext = vs;
+        InitializeComponent();
 	}
 }

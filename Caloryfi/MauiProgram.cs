@@ -53,6 +53,7 @@ namespace Caloryfi
             //VIEWMODEL
             builder.Services.AddTransient<ViewModel.LoginViewModel>();
             builder.Services.AddTransient<ViewModel.RegisterAccountViewModel>();
+            builder.Services.AddTransient<ViewModel.ProfileViewModels.ProfileViewModel>();
             builder.Services.AddTransient<ViewModel.ProfileViewModels.SettingsViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
