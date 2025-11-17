@@ -45,21 +45,21 @@ namespace Caloryfi.ViewModel
             }
             try
             {
-                var result = await _userService.LogInAsync(EmailInput, PasswordInput);
-                if (!result.success)
-                {
-                    ErrorMessage = result.message;
-                    PasswordInput = "";
-                    LoadingIsVisible = false;
-                    return;
-                }
-                var UserDataResult = await _userService.GetUserInfoAsync();
-                if (!UserDataResult)
-                {
-                    ErrorMessage = "Can't download userdata";
-                    LoadingIsVisible = false;
-                    return;
-                }
+                //var result = await _userService.LogInAsync(EmailInput, PasswordInput);
+                //if (!result.success)
+                //{
+                //    ErrorMessage = result.message;
+                //    PasswordInput = "";
+                //    LoadingIsVisible = false;
+                //    return;
+                //}
+                //var UserDataResult = await _userService.GetUserInfoAsync();
+                //if (!UserDataResult)
+                //{
+                //    ErrorMessage = "Can't download userdata";
+                //    LoadingIsVisible = false;
+                //    return;
+                //}
                 Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
             }
             catch

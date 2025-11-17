@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Caloryfi.Model
 {
-    class IngriedentsModel
+    public class IngriedentsModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Kcal { get; set; }
         public int Carbs { get; set; }

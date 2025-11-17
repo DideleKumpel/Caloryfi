@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Caloryfi.View.YourDayViews.YourDayView"
              xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
+             xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:YourDayViewModel"
              Title="Your Day">
     <Grid>
@@ -11,19 +12,78 @@
             <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <ScrollView Grid.Row="0">
-            <ContentView>
-                
-            </ContentView>
+            <CollectionView
+                 ItemsSource="{Binding MealsList}"
+                 SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:MealModel">
+                        <Grid Margin="0,0,0,30">
+                            <Border Padding="15"
+                                StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                Background="{StaticResource SecondaryBackgroundColor}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Style="{StaticResource Big}"  Margin="0,0,0,20"
+                                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                           Text="Meal 1"/>
+                                    <Button Style="{StaticResource MainButton}" Grid.Column="1" Margin="0,0,0,20"
+                                            Text="Details"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="1"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="Calories"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="2"
+                                           Margin="0,0,0,20"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="{Binding Calories}"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="3"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="Fats"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="4"
+                                           Margin="0,0,0,20"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="{Binding Fats}"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="1"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="Protein"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="2"
+                                           Margin="0,0,0,20"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="{Binding Proteins}"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="3"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="Carbs"/>
+                                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="4"
+                                           Margin="0,0,0,20"
+                                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        Text="{Binding Carbs}"/>
+                                </Grid>
+
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </ScrollView>
         <Border Grid.Row="1"
                 BackgroundColor="{StaticResource SecondaryColor}"
                 StrokeShape="RoundRectangle 30" StrokeThickness="0"
-                Margin="0,0,-30,0" Padding="10">
+                Margin="0,0,0,-30" Padding="10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -38,7 +98,47 @@
                 <Label Grid.Row="1" Grid.Column="0"
                         Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                        Text="{Binding }"/>
+                        Text="{Binding TotalCaloriesForToday}"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding UserSettings.Kcal}"/>
+                <Label Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="Protein"/>
+                <Label Grid.Row="1" Grid.Column="1"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding TotalProteinsForToday}"/>
+                <Label Grid.Row="2" Grid.Column="1"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding UserSettings.Proteins}"/>
+                <Label Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="Carbs"/>
+                <Label Grid.Row="1" Grid.Column="2"
+                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                     Text="{Binding TotalCarbsForToday}"/>
+                <Label Grid.Row="2" Grid.Column="2"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding UserSettings.Carbs}"/>
+                <Label Grid.Row="0" Grid.Column="4"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="Fats"/>
+                <Label Grid.Row="1" Grid.Column="4"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding TotalFatsForToday}"/>
+                <Label Grid.Row="2" Grid.Column="4"
+                    Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Text="{Binding UserSettings.Fats}"/>
 
             </Grid>
         </Border>

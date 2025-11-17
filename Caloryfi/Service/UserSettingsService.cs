@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Caloryfi.Service
 {
-    class UserSettingsService
+    public class UserSettingsService
     {
         private readonly HttpClient _httpClient;
         private UserSettingsModel _userSettings;   // tu zapisujesz ustawienia użytkownika po pobraniu ich z API beda dostpene dla kazdego viewmodelu nei bedzie trzeba pobierac ich wielokrotnie
