@@ -2,11 +2,45 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Caloryfi.View.YourDayViews.YourDayView"
-             Title="YourDayView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Your day placeholder"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
+             x:DataType="viewmodels:YourDayViewModel"
+             Title="Your Day">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+            <ContentView>
+                
+            </ContentView>
+        </ScrollView>
+        <Border Grid.Row="1"
+                BackgroundColor="{StaticResource SecondaryColor}"
+                StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                Margin="0,0,-30,0" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="Kcal"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                        Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                        HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                        Text="{Binding }"/>
+
+            </Grid>
+        </Border>
+    </Grid>
 </ContentPage>

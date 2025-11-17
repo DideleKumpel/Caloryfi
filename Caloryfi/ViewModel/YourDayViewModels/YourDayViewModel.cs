@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Caloryfi.ViewModel.YourDayViewModels
 {
-    class YourDayViewModel : ObservableObject
+    public partial class YourDayViewModel : ObservableObject
     {
 
     }

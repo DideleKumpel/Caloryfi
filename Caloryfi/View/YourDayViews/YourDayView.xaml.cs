@@ -1,9 +1,12 @@
+using Caloryfi.ViewModel.YourDayViewModels;
+
 namespace Caloryfi.View.YourDayViews;
 
 public partial class YourDayView : ContentPage
 {
-	public YourDayView()
+	public YourDayView(YourDayViewModel vm)
 	{
-		InitializeComponent();
+		BindingContext = vm;
+        InitializeComponent();
 	}
 }
