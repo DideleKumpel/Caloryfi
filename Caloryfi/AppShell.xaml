@@ -11,7 +11,7 @@
     Title="Caloryfi">
 
     <TabBar>
-        <Tab Title="YOUR DAY" Icon="calendar.png">
+        <Tab Title="YOUR DAY" Icon="calendar.png" >
             <ShellContent ContentTemplate="{DataTemplate history:HistoryView}"/>
         </Tab>
         <Tab Title="Workouts" Icon="fork.png">
