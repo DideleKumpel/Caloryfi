@@ -19,7 +19,7 @@
                     Aspect="AspectFit"
                     Margin="0"
                     />
-                <Label Style="{StaticResource Big}"  Text="HeavyLift" HorizontalOptions="Center" FontAttributes="Bold"/>
+                <Label Style="{StaticResource Big}"  Text="Caloryfi" HorizontalOptions="Center" FontAttributes="Bold"/>
                 <Label Style="{StaticResource Header}" Text="Register" HorizontalOptions="Center" FontAttributes="Bold"/>
 
                 <Border Padding="5"
