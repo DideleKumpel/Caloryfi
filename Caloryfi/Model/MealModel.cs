@@ -8,7 +8,10 @@ namespace Caloryfi.Model
 {
     class MealModel
     {
-       public DateTime Date_Added { get; set; }
-       public virtual ICollection<IngriedentsModel> Ingriedents { get; set; }
+        public int Calories { get; set; }
+        public int Carbs { get; set; }
+        public int Proteins { get; set; }
+        public int Fats { get; set; }
+        public virtual ICollection<IngriedentsModel> Ingriedents { get; set; }
     }
 }
