@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,53 @@ namespace Caloryfi.Model
     public class MealModel
     {
         public int Id { get; set; }
-        public int Calories { get; set; }
-        public int Carbs { get; set; }
-        public int Proteins { get; set; }
-        public int Fats { get; set; }
-        public virtual ICollection<IngriedentsModel> Ingriedents { get; set; }
+        public int Calories { get {
+                int totalCalories = 0;
+                if (Ingriedents != null)
+                {
+                    foreach (var item in Ingriedents)
+                    {
+                        totalCalories += (int)item.FoodKcal;
+                    }
+                }
+                return totalCalories;
+            } 
+        }
+        public int Carbs { get {
+                int totalCarbs = 0;
+                if (Ingriedents != null)
+                {
+                    foreach (var item in Ingriedents)
+                    {
+                        totalCarbs += (int)item.FoodCarbs;
+                    }
+                }
+                return totalCarbs;
+            } }
+        public int Proteins { get {
+                int totalProteins = 0;
+                if (Ingriedents != null)
+                {
+                    foreach (var item in Ingriedents)
+                    {
+                        totalProteins += (int)item.FoodProteins;
+                    }
+                }
+                return totalProteins;
+            } 
+        }
+        public int Fats { get {
+                int totalFats = 0;
+                if (Ingriedents != null)
+                {
+                    foreach (var item in Ingriedents)
+                    {
+                        totalFats += (int)item.FoodFats;
+                    }
+                }
+                return totalFats;
+            }
+        }
+        public virtual ObservableCollection<FoodModel> Ingriedents { get; set; }
     }
 }

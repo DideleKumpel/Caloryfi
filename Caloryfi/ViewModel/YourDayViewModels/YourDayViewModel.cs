@@ -32,8 +32,14 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         {
             _userSettingsService = userSettingsService;
             UserSettings = userSettingsService.UserSettings;
-            _mealsList = new ObservableCollection<MealModel> { new MealModel { Calories = 1234, Proteins= 123, Carbs=123, Fats=123 }, 
-                new MealModel { Calories = 1234, Proteins = 123, Carbs = 123, Fats = 123 } };
+            _mealsList = new ObservableCollection<MealModel> {
+                    new MealModel { Ingriedents = new ObservableCollection<FoodModel> { new FoodModel { Wieght = 100.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food1" },
+                        new FoodModel { Wieght = 200.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" },
+                        new FoodModel { Wieght = 100.0, Kcal = 200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" }
+                    }
+                }
+            };
         }
     }
+
 }
