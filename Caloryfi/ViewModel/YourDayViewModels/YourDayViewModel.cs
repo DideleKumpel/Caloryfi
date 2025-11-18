@@ -1,6 +1,7 @@
 ﻿using Caloryfi.Model;
 using Caloryfi.Service;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,6 +40,21 @@ namespace Caloryfi.ViewModel.YourDayViewModels
                     }
                 }
             };
+            CalculateTotals();
+        }
+
+        [RelayCommand]
+        private void SwitchToMealDetails(MealModel selectedMeal)
+        {
+            
+        }
+
+        private void CalculateTotals()
+        {
+            TotalCaloriesForToday = MealsList.Sum(meal => meal.Calories);
+            TotalProteinsForToday = MealsList.Sum(meal => meal.Proteins);
+            TotalCarbsForToday = MealsList.Sum(meal => meal.Carbs);
+            TotalFatsForToday = MealsList.Sum(meal => meal.Fats);
         }
     }
 

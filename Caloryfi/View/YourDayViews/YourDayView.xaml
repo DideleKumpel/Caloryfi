@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:YourDayViewModel"
              Title="Your Day">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="120"/>
@@ -18,7 +18,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:MealModel">
                         <Grid Margin="0,0,0,30">
-                            <Border Padding="15"
+                            <Border Padding="15" Margin="10"
                                 StrokeShape="RoundRectangle 30" StrokeThickness="0"
                                 Background="{StaticResource SecondaryBackgroundColor}">
                                 <Grid>
@@ -38,7 +38,9 @@
                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                            Text="Meal 1"/>
                                     <Button Style="{StaticResource MainButton}" Grid.Column="1" Margin="0,0,0,20"
-                                            Text="Details"/>
+                                            Text="Details"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=SwitchToMealDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
                                     <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="1"
                                         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                         Text="Calories"/>
