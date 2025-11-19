@@ -86,6 +86,19 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
+    <Style x:Key="RoundGreenAddButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="Text" Value="+"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
     <Style x:Key="Header" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontSize" Value="28"/>

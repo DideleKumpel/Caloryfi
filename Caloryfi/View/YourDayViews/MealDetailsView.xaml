@@ -86,6 +86,11 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-        
+        <Button Style="{StaticResource RoundGreenAddButton}"
+                HorizontalOptions="End" VerticalOptions="End"
+                Margin="20" 
+                HeightRequest="120" WidthRequest="120"
+                CornerRadius="60" FontSize="60"
+                Shadow="#000000 1 2"/>
     </Grid>
 </ContentPage>

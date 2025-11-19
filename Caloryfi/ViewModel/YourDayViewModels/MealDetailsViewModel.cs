@@ -15,9 +15,20 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         private MealModel _meal;
 
         [RelayCommand]
-        private void Test()
+        private void AddFood()
         {
-            Console.WriteLine("Test");
+            // Logic to add food to the meal
+        }
+
+        [RelayCommand]
+        private void ShowFoodDetails(FoodModel selectedFood)
+        {
+            // Logic to show food details
+        }
+
+        [RelayCommand]
+        private void DeleteFood(FoodModel selectedFood)
+        {
+            // Logic to delete food from the meal
         }
     }
-}
