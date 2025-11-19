@@ -26,12 +26,13 @@
 
     <Style x:Key="MainButton" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
-        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="CornerRadius" Value="17"/>
-        <Setter Property="BorderWidth" Value="5" />
+        <Setter Property="BorderWidth" Value="8" />
         <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="Padding" Value="30,15"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -50,12 +51,13 @@
 
     <Style x:Key="DangerButton" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
-        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource DangerColor}"/>
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="CornerRadius" Value="17"/>
-        <Setter Property="BorderWidth" Value="5" />
+        <Setter Property="BorderWidth" Value="8" />
         <Setter Property="BorderColor" Value="{StaticResource DangerColor}"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="Padding" Value="30,15"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

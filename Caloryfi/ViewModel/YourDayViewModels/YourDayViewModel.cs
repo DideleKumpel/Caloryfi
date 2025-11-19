@@ -44,9 +44,12 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         }
 
         [RelayCommand]
-        private void SwitchToMealDetails(MealModel selectedMeal)
+        private async Task SwitchToMealDetails(MealModel selectedMeal)
         {
-            
+            await Shell.Current.GoToAsync(nameof(View.YourDayViews.MealDetailsView), new Dictionary<string, object>
+            {
+                { "CurrentMealModel", selectedMeal }
+            });
         }
 
         private void CalculateTotals()

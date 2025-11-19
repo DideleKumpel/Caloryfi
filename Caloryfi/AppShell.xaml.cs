@@ -1,4 +1,5 @@
 ﻿using Caloryfi.View.ProfileViews;
+using Caloryfi.View.YourDayViews;
 
 namespace Caloryfi
 {
@@ -9,6 +10,7 @@ namespace Caloryfi
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
+            Routing.RegisterRoute(nameof(MealDetailsView), typeof(MealDetailsView));
         }
     }
 }

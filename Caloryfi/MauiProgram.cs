@@ -50,6 +50,7 @@ namespace Caloryfi
             builder.Services.AddTransient<View.HistoryViews.HistoryView>();
             builder.Services.AddTransient<View.ProfileViews.ProfileView>();
             builder.Services.AddTransient<View.YourDayViews.YourDayView>();
+            builder.Services.AddTransient<View.YourDayViews.MealDetailsView>();
             builder.Services.AddTransient<View.ProfileViews.SettingsView>();
 
             //VIEWMODEL
@@ -58,6 +59,7 @@ namespace Caloryfi
             builder.Services.AddTransient<ViewModel.ProfileViewModels.ProfileViewModel>();
             builder.Services.AddTransient<ViewModel.ProfileViewModels.SettingsViewModel>();
             builder.Services.AddTransient<ViewModel.YourDayViewModels.YourDayViewModel>();
+            builder.Services.AddTransient<ViewModel.YourDayViewModels.MealDetailsViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
