@@ -32,3 +32,4 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             // Logic to delete food from the meal
         }
     }
+}

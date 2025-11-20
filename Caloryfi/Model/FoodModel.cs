@@ -9,33 +9,33 @@ namespace Caloryfi.Model
 {
     public class FoodModel: IngriedentsModel
     {
-        public double Wieght { get; set; }
+        public double Weight { get; set; }
         public double FoodKcal 
-        { 
-            get 
+        {
+            get
             {
-                return (Wieght / 100) * Kcal;
+                return Kcal;
             }
         }
         public double FoodProteins
         {
             get
             {
-                return (Wieght / 100) * Proteins;
+                return Proteins;
             }
         }
         public double FoodCarbs
         {
             get
             {
-                return (Wieght / 100) * Carbs;
+                return Carbs;
             }
         }
         public double FoodFats
         {
             get
             {
-                return (Wieght / 100) * Fats;
+                return Fats;
             }
         }
     }
