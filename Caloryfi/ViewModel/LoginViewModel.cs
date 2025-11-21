@@ -106,6 +106,20 @@ namespace Caloryfi.ViewModel
                     return;
                 }
                 bool succes = await _userService.RefreshToken(token);
+                var UserDataResult = await _userService.GetUserInfoAsync();
+                if (!UserDataResult)
+                {
+                    ErrorMessage = "Can't download userdata";
+                    LoadingIsVisible = false;
+                    return;
+                }
+                var UserSettingsResult = await _userSettingsService.GetUserSettingsAsync();
+                if (!UserSettingsResult.success)
+                {
+                    ErrorMessage = "Can't download usersettings";
+                    LoadingIsVisible = false;
+                    return;
+                }
                 if (succes)
                 {
                     Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();

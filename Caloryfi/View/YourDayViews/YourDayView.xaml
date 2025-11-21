@@ -85,7 +85,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -108,15 +108,15 @@
                 <Label Grid.Row="0" Grid.Column="1"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="Protein"/>
+                    Text="Prot"/>
                 <Label Grid.Row="1" Grid.Column="1"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="{Binding TotalProteinsForToday}"/>
+                    Text="{Binding TotalProteinsForToday, StringFormat='{0}/'}"/>
                 <Label Grid.Row="2" Grid.Column="1"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="{Binding UserSettings.Proteins}"/>
+                    Text="{Binding UserSettings.Proteins, StringFormat='{0}g'}"/>
                 <Label Grid.Row="0" Grid.Column="2"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
@@ -124,11 +124,11 @@
                 <Label Grid.Row="1" Grid.Column="2"
                      Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                      HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                     Text="{Binding TotalCarbsForToday}"/>
+                     Text="{Binding TotalCarbsForToday, StringFormat='{0}/'}"/>
                 <Label Grid.Row="2" Grid.Column="2"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="{Binding UserSettings.Carbs}"/>
+                    Text="{Binding UserSettings.Carbs, StringFormat='{0}g'}"/>
                 <Label Grid.Row="0" Grid.Column="4"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
@@ -136,7 +136,7 @@
                 <Label Grid.Row="1" Grid.Column="4"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="{Binding TotalFatsForToday}"/>
+                    Text="{Binding TotalFatsForToday, StringFormat='{0}/'}"/>
                 <Label Grid.Row="2" Grid.Column="4"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
