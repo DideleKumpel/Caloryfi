@@ -28,7 +28,26 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         private int _totalCarbsForToday;
         [ObservableProperty]
         private int _totalFatsForToday;
-        
+        public int MaxProteinForToday { get
+            {
+                return (int)(_userSettings.Kcal * _userSettings.Proteins / 4);
+            } 
+        }
+        public int MaxCarbsForToday
+        {
+            get
+            {
+                return (int)(_userSettings.Kcal * _userSettings.Carbs / 4);
+            }
+        }
+        public int MaxFatsnForToday
+        {
+            get
+            {
+                return (int)(_userSettings.Kcal * _userSettings.Fats / 9);
+            }
+        }
+
 
         public YourDayViewModel(IServiceProvider serviceProvider, UserSettingsService userSettingsService)
         {
