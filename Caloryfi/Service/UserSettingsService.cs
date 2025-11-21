@@ -26,7 +26,7 @@ namespace Caloryfi.Service
         {
             try
             {
-                var response = await _httpClient.GetAsync("/api/UserSettings/Get");
+                var response = await _httpClient.GetAsync("/api/Setting/GetSettings");
                 if (!response.IsSuccessStatusCode)
                     return (false, "Failed to fetch user settings");
 
@@ -46,7 +46,7 @@ namespace Caloryfi.Service
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync("/api/UserSettings/Update", updatedSettings);
+                var response = await _httpClient.PutAsJsonAsync("/api/Setting/UpdateSettings", updatedSettings);
 
                 if (response.IsSuccessStatusCode)
                 {

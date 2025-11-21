@@ -140,7 +140,7 @@
                 <Label Grid.Row="2" Grid.Column="4"
                     Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Text="{Binding UserSettings.Fats}"/>
+                    Text="{Binding UserSettings.Fats, StringFormat='{0}g'}"/>
 
             </Grid>
         </Border>

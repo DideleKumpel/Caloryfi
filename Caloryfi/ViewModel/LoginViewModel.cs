@@ -15,6 +15,7 @@ namespace Caloryfi.ViewModel
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly UserService _userService;
+        private readonly UserSettingsService _userSettingsService;
 
         [ObservableProperty]
         public string _emailInput;
@@ -45,21 +46,28 @@ namespace Caloryfi.ViewModel
             }
             try
             {
-                //var result = await _userService.LogInAsync(EmailInput, PasswordInput);
-                //if (!result.success)
-                //{
-                //    ErrorMessage = result.message;
-                //    PasswordInput = "";
-                //    LoadingIsVisible = false;
-                //    return;
-                //}
-                //var UserDataResult = await _userService.GetUserInfoAsync();
-                //if (!UserDataResult)
-                //{
-                //    ErrorMessage = "Can't download userdata";
-                //    LoadingIsVisible = false;
-                //    return;
-                //}
+                var result = await _userService.LogInAsync(EmailInput, PasswordInput);
+                if (!result.success)
+                {
+                    ErrorMessage = result.message;
+                    PasswordInput = "";
+                    LoadingIsVisible = false;
+                    return;
+                }
+                var UserDataResult = await _userService.GetUserInfoAsync();
+                if (!UserDataResult)
+                {
+                    ErrorMessage = "Can't download userdata";
+                    LoadingIsVisible = false;
+                    return;
+                }
+                var UserSettingsResult = await _userSettingsService.GetUserSettingsAsync();
+                if (!UserSettingsResult.success)
+                {
+                    ErrorMessage = "Can't download usersettings";
+                    LoadingIsVisible = false;
+                    return;
+                }
                 Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
             }
             catch
@@ -76,11 +84,12 @@ namespace Caloryfi.ViewModel
             Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterAccountView>();
         }
 
-        public LoginViewModel(UserService userService, IServiceProvider serviceProvider)
+        public LoginViewModel(UserService userService, IServiceProvider serviceProvider, UserSettingsService userSettings)
         {
             ErrorMessage = "";
             _userService = userService;
             _serviceProvider = serviceProvider;
+            _userSettingsService = userSettings;
             _loadingIsVisible = false;
             TryToLogIn();
         }

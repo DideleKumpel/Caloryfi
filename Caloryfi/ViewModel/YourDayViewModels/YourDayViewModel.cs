@@ -28,6 +28,7 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         private int _totalCarbsForToday;
         [ObservableProperty]
         private int _totalFatsForToday;
+        
 
         public YourDayViewModel(IServiceProvider serviceProvider, UserSettingsService userSettingsService)
         {

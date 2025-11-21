@@ -78,7 +78,7 @@ namespace Caloryfi.Service
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", OldToken);
-                var response = await _httpClient.PostAsync("/api/Authorization/RefreshToken", null);
+                var response = await _httpClient.GetAsync("/api/User/RefreshToken");
 
                 if (response.IsSuccessStatusCode)
                 {
