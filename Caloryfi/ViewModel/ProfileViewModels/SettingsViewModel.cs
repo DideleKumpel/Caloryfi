@@ -59,6 +59,7 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         [RelayCommand]
         private async Task SaveSettings()
         {
+            
         }
 
         [RelayCommand]

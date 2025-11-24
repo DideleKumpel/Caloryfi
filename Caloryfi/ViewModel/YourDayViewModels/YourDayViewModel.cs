@@ -2,6 +2,7 @@
 using Caloryfi.Service;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ namespace Caloryfi.ViewModel.YourDayViewModels
     public partial class YourDayViewModel : ObservableObject
     {
         private readonly UserSettingsService _userSettingsService;
+        private readonly MealService _mealService;
 
         [ObservableProperty]
         private ObservableCollection<MealModel> _mealsList = new ObservableCollection<MealModel>();
@@ -49,9 +51,10 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         }
 
 
-        public YourDayViewModel(IServiceProvider serviceProvider, UserSettingsService userSettingsService)
+        public YourDayViewModel(UserSettingsService userSettingsService, MealService mealService)
         {
             _userSettingsService = userSettingsService;
+            _mealService = mealService;
             UserSettings = userSettingsService.UserSettings;
             _mealsList = new ObservableCollection<MealModel> {
                     new MealModel { Ingriedents = new ObservableCollection<FoodModel> { new FoodModel { Weight = 100.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food1" },
@@ -60,6 +63,7 @@ namespace Caloryfi.ViewModel.YourDayViewModels
                     }
                 }
             };
+            LoadToDayMeals();
             CalculateTotals();
         }
 
@@ -70,6 +74,17 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             {
                 { "CurrentMealModel", selectedMeal }
             });
+        }
+
+        private async void LoadToDayMeals()
+        {
+            var result =  await _mealService.GetToDaysMeals();
+            if (result.success)
+            {
+                _mealsList = JsonConvert.DeserializeObject<ObservableCollection<MealModel>>(result.message);
+            }
+            else {
+                }
         }
 
         private void CalculateTotals()

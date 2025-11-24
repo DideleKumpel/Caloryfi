@@ -46,7 +46,7 @@ namespace Caloryfi.Service
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/User/Login", new { Email = email, Password = password });
+                var response = await _httpClient.PostAsJsonAsync("/api/User/Login", new { email = email, password = password });
 
                 if (response.IsSuccessStatusCode)
                 {
