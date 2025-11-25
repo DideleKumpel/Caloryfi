@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:YourDayViewModel"
              Title="Your Day">
-    <Grid Margin="10">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="120"/>
@@ -143,6 +143,25 @@
                     Text="{Binding MaxFatsnForToday, StringFormat='{0}g'}"/>
 
             </Grid>
+        </Border>
+
+        <!-- Loading screen !-->
+        <Border Grid.Row="0" Grid.RowSpan="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+            <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+        <!-- Error screen-->
+        <Border Grid.Row="0" Grid.RowSpan="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding ErrorMessageVisible}" Padding="20">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="no_connection_icon.png" 
+               HeightRequest="100"
+               Aspect="AspectFit"
+               Margin="0"/>
+                <Label Style="{StaticResource Big}" Text="Error ocurded while loading meals."
+               HorizontalOptions="Center"
+               />
+                <Label Style="{StaticResource Medium}" Text="Check your internet connection and reload app."
+               HorizontalOptions="Center"/>
+            </VerticalStackLayout>
         </Border>
     </Grid>
 </ContentPage>

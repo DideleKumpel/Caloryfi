@@ -23,6 +23,10 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         [ObservableProperty]
         private UserSettingsModel _userSettings; // use for dispaly of daily calories goal
         [ObservableProperty]
+        private bool _ErrorMessageVisible;
+        [ObservableProperty]
+        private bool _loadingIsVisible;
+        [ObservableProperty]
         private int _totalCaloriesForToday;
         [ObservableProperty]
         private int _totalProteinsForToday;
@@ -56,13 +60,13 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             _userSettingsService = userSettingsService;
             _mealService = mealService;
             UserSettings = userSettingsService.UserSettings;
-            _mealsList = new ObservableCollection<MealModel> {
-                    new MealModel { Ingriedents = new ObservableCollection<FoodModel> { new FoodModel { Weight = 100.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food1" },
-                        new FoodModel { Weight = 200.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" },
-                        new FoodModel { Weight = 100.0, Kcal = 200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" }
-                    }
-                }
-            };
+            //_mealsList = new ObservableCollection<MealModel> {
+            //        new MealModel { Ingredients = new ObservableCollection<FoodModel> { new FoodModel { Weight = 100.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food1" },
+            //            new FoodModel { Weight = 200.0, Kcal=200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" },
+            //            new FoodModel { Weight = 100.0, Kcal = 200, Carbs = 10, Fats = 20, Proteins = 20, Name = "food2" }
+            //        }
+            //    }
+            //};
             LoadToDayMeals();
             CalculateTotals();
         }
@@ -78,13 +82,17 @@ namespace Caloryfi.ViewModel.YourDayViewModels
 
         private async void LoadToDayMeals()
         {
+            LoadingIsVisible = true;
             var result =  await _mealService.GetToDaysMeals();
             if (result.success)
             {
-                _mealsList = JsonConvert.DeserializeObject<ObservableCollection<MealModel>>(result.message);
+                MealsList = JsonConvert.DeserializeObject<ObservableCollection<MealModel>>(result.message);
             }
             else {
-                }
+                ErrorMessageVisible = true;
+            }
+            CalculateTotals();
+            LoadingIsVisible = false;
         }
 
         private void CalculateTotals()

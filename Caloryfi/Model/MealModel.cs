@@ -12,9 +12,9 @@ namespace Caloryfi.Model
         public int Id { get; set; }
         public int Calories { get {
                 int totalCalories = 0;
-                if (Ingriedents != null)
+                if (Ingredients != null)
                 {
-                    foreach (var item in Ingriedents)
+                    foreach (var item in Ingredients)
                     {
                         totalCalories += (int)item.FoodKcal;
                     }
@@ -24,9 +24,9 @@ namespace Caloryfi.Model
         }
         public int Carbs { get {
                 int totalCarbs = 0;
-                if (Ingriedents != null)
+                if (Ingredients != null)
                 {
-                    foreach (var item in Ingriedents)
+                    foreach (var item in Ingredients)
                     {
                         totalCarbs += (int)item.FoodCarbs;
                     }
@@ -35,9 +35,9 @@ namespace Caloryfi.Model
             } }
         public int Proteins { get {
                 int totalProteins = 0;
-                if (Ingriedents != null)
+                if (Ingredients != null)
                 {
-                    foreach (var item in Ingriedents)
+                    foreach (var item in Ingredients)
                     {
                         totalProteins += (int)item.FoodProteins;
                     }
@@ -47,9 +47,9 @@ namespace Caloryfi.Model
         }
         public int Fats { get {
                 int totalFats = 0;
-                if (Ingriedents != null)
+                if (Ingredients != null)
                 {
-                    foreach (var item in Ingriedents)
+                    foreach (var item in Ingredients)
                     {
                         totalFats += (int)item.FoodFats;
                     }
@@ -57,6 +57,6 @@ namespace Caloryfi.Model
                 return totalFats;
             }
         }
-        public virtual ObservableCollection<FoodModel> Ingriedents { get; set; }
+        public virtual ObservableCollection<FoodModel> Ingredients { get; set; }
     }
 }
