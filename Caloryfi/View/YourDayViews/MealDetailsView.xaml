@@ -9,7 +9,7 @@
     <Grid>
         <ScrollView>
             <CollectionView 
-                ItemsSource="{Binding Meal.Ingriedents}"
+                ItemsSource="{Binding Meal.Ingredients}"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:FoodModel">
