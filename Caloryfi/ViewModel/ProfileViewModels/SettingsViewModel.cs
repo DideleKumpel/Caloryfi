@@ -20,6 +20,8 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         [ObservableProperty]
         private UserModel _userInfo;
         [ObservableProperty]
+        private string _oldPasswordInput;
+        [ObservableProperty]
         private string _passwordInput;
         [ObservableProperty]
         private string _repeatPasswordInput;
@@ -54,6 +56,12 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         public SettingsViewModel(IServiceProvider Service)
         {
             _service = Service;
+        }
+
+        [RelayCommand]
+        private async Task ChangePassword()
+        {
+
         }
 
         [RelayCommand]
