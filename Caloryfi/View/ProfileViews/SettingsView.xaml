@@ -29,6 +29,15 @@
             />
             </Border>
             <Label Style="{StaticResource Header}"
+            Text="Old password"/>
+            <Border Padding="5" Margin="0,0,0,20"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding OldPasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+                 />
+            </Border>
+            <Label Style="{StaticResource Header}"
             Text="Password"/>
             <Border Padding="5" Margin="0,0,0,20"
             Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
@@ -47,6 +56,9 @@
                     Text="{Binding RepeatPasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
                 />
             </Border>
+
+            <Button Style="{StaticResource DangerButton}"
+                    Text="Change password" />
 
             <Grid x:Name="SexSelectGrid">
                 <Grid.ColumnDefinitions>
@@ -67,9 +79,9 @@
 
                     <customcontrols:MainRadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
-                EventName="CheckedChanged"
-                Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
-                CommandParameter="2"/>
+                            EventName="CheckedChanged"
+                            Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
+                            CommandParameter="2"/>
                     </customcontrols:MainRadioButton.Behaviors>
                 </customcontrols:MainRadioButton>
 
