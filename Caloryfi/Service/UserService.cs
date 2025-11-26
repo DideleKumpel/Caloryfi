@@ -73,6 +73,34 @@ namespace Caloryfi.Service
             }
         }
 
+        public async Task<(bool succes, string message)> ChangePassword(string OldPassword, string NewPassword)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("/api/User/ChangePassword", new { OldPassword = OldPassword, NewPassword = NewPassword });
+                if (response.IsSuccessStatusCode)
+                {
+                    return (true, "Password changed successfully");
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return (false, $"Failed to change password: {content}");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, "An error occurred while connecting to the server");
+            }
+        }
+
+        public async Task LogOutAsync()
+        {
+            await SecureStorage.SetAsync("AuthTokenKey", string.Empty);
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+            _userInfo = null;
+        }
+
         public async Task<bool> RefreshToken(string OldToken)
         {
             try
