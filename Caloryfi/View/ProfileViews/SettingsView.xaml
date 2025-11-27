@@ -16,18 +16,30 @@
             Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
             Background="{StaticResource BackgroundColor}">
                 <Entry Placeholder="Username" PlaceholderColor="{StaticResource TextColor}"
-                Text="{Binding UserInfo.Username}" TextColor="{StaticResource TextColor}" FontSize="16"
+                Text="{Binding UsernameInput}" TextColor="{StaticResource TextColor}" FontSize="16"
             />
             </Border>
+            <Label Style="{StaticResource Warning}" HorizontalTextAlignment="Center"
+                   IsVisible="{Binding UsernameChangedErrorVisible}"
+                    Text="Error ocured while changing username"/>
+            <Button Style="{StaticResource DangerButton}"
+                Text="Change username" 
+                    Command="{Binding Cha}"/>
             <Label Style="{StaticResource Header}"
             Text="E-mail"/>
             <Border Padding="5" Margin="0,0,0,20"
             Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
             Background="{StaticResource BackgroundColor}">
                 <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
-                Text="{Binding UserInfo.Email}" TextColor="{StaticResource TextColor}" FontSize="16"
-            />
+                Text="{Binding EmailInput}" TextColor="{StaticResource TextColor}" FontSize="16"
+                />
             </Border>
+            <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"
+                   IsVisible="{Binding EmailChangedErrorVisible}"
+                    Text="Error ocured while changing email"/>
+            <Button Style="{StaticResource DangerButton}"
+                    Text="Change email" 
+                    Command="{Binding ChangeEmailCommand}"/>
             <Label Style="{StaticResource Header}"
             Text="Old password"/>
             <Border Padding="5" Margin="0,0,0,20"
@@ -56,9 +68,12 @@
                     Text="{Binding RepeatPasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
                 />
             </Border>
-
+            <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"
+                 IsVisible="{Binding PasswordChangedErrorVisible}"
+                Text="{Binding PasswordChangeErrorMessage}"/>
             <Button Style="{StaticResource DangerButton}"
-                    Text="Change password" />
+                    Text="Change password" 
+                    Command="{Binding ChangePasswordCommand}"/>
 
             <Grid x:Name="SexSelectGrid">
                 <Grid.ColumnDefinitions>
