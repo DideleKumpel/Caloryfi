@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
+    xmlns:model="clr-namespace:Caloryfi.Model"
+    x:Class="Caloryfi.View.YourDayViews.AddFoodView"
+    Title="ADD FOOD">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Spacing="15">
+
+            <Entry Placeholder="Search"
+                   Text="{Binding SearchText}" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="TAKE PECTURE OF MEAL"
+                        Style="{StaticResource MainButton}"
+                        Command="{Binding GoToMealPictureCommand}"/>
+
+                <Button Text="CUSTOM INGREDIENT"
+                        Style="{StaticResource MainButton}"
+                        Command="{Binding GoToCustomIngredientCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Ingredients}"
+                        Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15"
+                          BackgroundColor="{StaticResource SecondaryColor}"
+                          Margin="0,10"
+                          ColumnDefinitions="*,Auto"
+                          HeightRequest="60"
+                          VerticalOptions="Center">
+
+                        <Label Text="{Binding Name}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource Big}"/>
+
+                        <Button Grid.Column="1"
+                                Style="{StaticResource RoundGreenAddButton}"
+                                Command="{Binding BindingContext.OpenAddWeightPopupCommand, Source={x:Reference Name=RootPage}}"
+                                CommandParameter="{Binding}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid
+            Grid.RowSpan="2"
+            BackgroundColor="#80000000"
+            IsVisible="{Binding PopupVisible}"
+            x:Name="RootPage">
+
+            <Grid HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  Padding="20"
+                  BackgroundColor="{StaticResource SecondaryColor}"
+                  WidthRequest="300"
+                  RowDefinitions="Auto,Auto,Auto,Auto">
+
+                <Label Text="YOU WANT TO ADD"
+                       Style="{StaticResource Big}"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding SelectedIngredient.Name}"
+                       Style="{StaticResource Header}"
+                       HorizontalOptions="Center"/>
+
+                <Entry Placeholder="ENTER WEIGHT"
+                       Text="{Binding EnteredWeight}"/>
+
+                <HorizontalStackLayout Spacing="15"
+                                       HorizontalOptions="Center">
+                    <Button Text="ADD"
+                            Style="{StaticResource MainButton}"
+                            Command="{Binding ConfirmAddIngredientCommand}"/>
+
+                    <Button Text="CANCEL"
+                            Style="{StaticResource DangerButton}"
+                            Command="{Binding CancelPopupCommand}"/>
+                </HorizontalStackLayout>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>
