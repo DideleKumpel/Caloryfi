@@ -21,10 +21,10 @@
             </Border>
             <Label Style="{StaticResource Warning}" HorizontalTextAlignment="Center"
                    IsVisible="{Binding UsernameChangedErrorVisible}"
-                    Text="Error ocured while changing username"/>
+                    Text="{Binding UsernameChangeErrorMessage}"/>
             <Button Style="{StaticResource DangerButton}"
                 Text="Change username" 
-                    Command="{Binding Cha}"/>
+                    Command="{Binding ChangeUsernameCommand}"/>
             <Label Style="{StaticResource Header}"
             Text="E-mail"/>
             <Border Padding="5" Margin="0,0,0,20"
@@ -36,7 +36,7 @@
             </Border>
             <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"
                    IsVisible="{Binding EmailChangedErrorVisible}"
-                    Text="Error ocured while changing email"/>
+                    Text="{Binding EmailChangeErrorMessage}"/>
             <Button Style="{StaticResource DangerButton}"
                     Text="Change email" 
                     Command="{Binding ChangeEmailCommand}"/>

@@ -102,29 +102,24 @@ namespace Caloryfi.ViewModel.ProfileViewModels
             if (string.IsNullOrWhiteSpace(OldPasswordInput))
             {
                 PasswordChangeErrorMessage = "Wirte your old password";
-                PasswordChangedErrorVisible = true;
-                return;
             }
-            if (string.IsNullOrWhiteSpace(PasswordInput) || string.IsNullOrWhiteSpace(RepeatPasswordInput))
+            else if (string.IsNullOrWhiteSpace(PasswordInput) || string.IsNullOrWhiteSpace(RepeatPasswordInput))
             {
                 PasswordChangeErrorMessage = "Write your new password";
-                PasswordChangedErrorVisible = true;
-                return;
             }
-            if (PasswordInput != RepeatPasswordInput)
+            else if (PasswordInput != RepeatPasswordInput)
             {
                 PasswordChangeErrorMessage = "Passwords do not match";
-                PasswordChangedErrorVisible = true;
-                return;
             }
-            if (PasswordInput == OldPasswordInput)
+            else if (PasswordInput == OldPasswordInput)
             {
                 PasswordChangeErrorMessage = "New and old password are thesame";
-                PasswordChangedErrorVisible = true;
-                return;
             }
-            var result = await _service.GetRequiredService<UserService>().ChangePasswordAsync(OldPasswordInput, PasswordInput);
-            PasswordChangeErrorMessage = result.message;
+            else
+            {
+                var result = await _service.GetRequiredService<UserService>().ChangePasswordAsync(OldPasswordInput, PasswordInput);
+                PasswordChangeErrorMessage = result.message;
+            }
             PasswordChangedErrorVisible = true;
             return;
         }
@@ -135,18 +130,38 @@ namespace Caloryfi.ViewModel.ProfileViewModels
             if (string.IsNullOrWhiteSpace(EmailInput))
             {
                 EmailChangeErrorMessage = "Write your new email";
-                EmailChangedErrorVisible = true;
-                return;
             }
-            if (EmailInput == _userService.UserModel.Email)
+            else if (EmailInput == _userService.UserModel.Email)
             {
                 EmailChangeErrorMessage = "New and old email are thesame";
-                EmailChangedErrorVisible = true;
-                return;
             }
-            var result = await _userService.ChangeEmailAsync(EmailInput);
-            EmailChangeErrorMessage = result.masage;
+            else
+            {
+                var result = await _userService.ChangeEmailAsync(EmailInput);
+                EmailChangeErrorMessage = result.masage;
+            }
             EmailChangedErrorVisible = true;
+            return;
+        }
+
+        [RelayCommand]
+        private async Task ChangeUsername()
+        {
+            if (string.IsNullOrWhiteSpace(UsernameInput))
+            {
+                UsernameChangeErrorMessage = "Write new username";
+                
+            }
+            else if (UsernameInput == _userService.UserModel.Username) 
+            {
+                UsernameChangeErrorMessage = "New username is same as old one";
+            }
+            else
+            {
+                var result = await _userService.ChangeUsername(UsernameInput);
+                UsernameChangeErrorMessage = result.masage;
+            }
+            UsernameChangedErrorVisible = true;
             return;
         }
 

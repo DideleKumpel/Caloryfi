@@ -115,6 +115,27 @@ namespace Caloryfi.Service
             }
         }
 
+        public async Task<(bool succes, string masage)> ChangeUsername(string newUsername)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsync($"/api/User/ChangeUsername/{newUsername}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return (true, "Username changed successfully");
+                }
+                else
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return (false, $"Failed to change username: {content}");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, "An error occurred while connecting to the server");
+            }
+        }
+
         public async Task LogOutAsync()
         {
             await SecureStorage.SetAsync("AuthTokenKey", string.Empty);
