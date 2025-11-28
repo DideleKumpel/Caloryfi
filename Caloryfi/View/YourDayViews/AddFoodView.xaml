@@ -14,18 +14,34 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Spacing="15">
-
+            <Border Padding="5" Margin="0,0,0,20"
+            Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+            Background="{StaticResource BackgroundColor}">
             <Entry Placeholder="Search"
-                   Text="{Binding SearchText}" />
+            Text="{Binding SearchText}" />
+            </Border>
+            
 
             <HorizontalStackLayout Spacing="10">
-                <Button Text="TAKE PECTURE OF MEAL"
-                        Style="{StaticResource MainButton}"
-                        Command="{Binding GoToMealPictureCommand}"/>
+                <Border Padding="5" Margin="0,0,0,20"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Background="{StaticResource BackgroundColor}">
+                <Button Text="TAKE PICTURE OF MEAL"
+                        Style="{StaticResource TextBtn}"
+                        Command="{Binding GoToMealPictureCommand}"
+                        LineBreakMode="WordWrap"
+                        WidthRequest="150"/>
+                </Border>
 
+                <Border Padding="5" Margin="0,0,0,20"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Background="{StaticResource BackgroundColor}">
                 <Button Text="CUSTOM INGREDIENT"
-                        Style="{StaticResource MainButton}"
-                        Command="{Binding GoToCustomIngredientCommand}"/>
+                        Style="{StaticResource TextBtn}"
+                        Command="{Binding GoToCustomIngredientCommand}"
+                        LineBreakMode="WordWrap"
+                        WidthRequest="150"/>
+                </Border>
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
@@ -34,22 +50,25 @@
                         Margin="0,20,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="15"
-                          BackgroundColor="{StaticResource SecondaryColor}"
+                    <Border Padding="15" Margin="10"
+                    StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                    Background="{StaticResource SecondaryBackgroundColor}">
+                        <Grid Padding="5"
                           Margin="0,10"
                           ColumnDefinitions="*,Auto"
                           HeightRequest="60"
                           VerticalOptions="Center">
 
-                        <Label Text="{Binding Name}"
+                            <Label Text="{Binding Name}"
                                VerticalOptions="Center"
                                Style="{StaticResource Big}"/>
 
-                        <Button Grid.Column="1"
+                            <Button Grid.Column="1"
                                 Style="{StaticResource RoundGreenAddButton}"
                                 Command="{Binding BindingContext.OpenAddWeightPopupCommand, Source={x:Reference Name=RootPage}}"
                                 CommandParameter="{Binding}" />
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -62,6 +62,7 @@ namespace Caloryfi
             builder.Services.AddTransient<ViewModel.ProfileViewModels.SettingsViewModel>();
             builder.Services.AddTransient<ViewModel.YourDayViewModels.YourDayViewModel>();
             builder.Services.AddTransient<ViewModel.YourDayViewModels.MealDetailsViewModel>();
+            builder.Services.AddTransient<ViewModel.YourDayViewModels.AddFoodViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
