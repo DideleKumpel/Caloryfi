@@ -5,9 +5,15 @@
              xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.ProfileViewModels"
              xmlns:customcontrols="clr-namespace:Caloryfi.CustomControls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:Converters="clr-namespace:Caloryfi.Converters"
              x:DataType="viewmodel:SettingsViewModel"
              Title="Settings">
     <Shell.TabBarIsVisible>False</Shell.TabBarIsVisible>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:InverseBoolConverter x:Key="InverseBoolConveter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="15">
             <Label Style="{StaticResource Header}"
@@ -90,29 +96,14 @@
                             GroupName="SexSelector"
                             Content="MALE"
                             Value="0"
-                            IsChecked="{Binding SexInput}">
-
-                    <customcontrols:MainRadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            EventName="CheckedChanged"
-                            Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
-                            CommandParameter="2"/>
-                    </customcontrols:MainRadioButton.Behaviors>
-                </customcontrols:MainRadioButton>
+                            IsChecked="{Binding SexInput}"/>
 
                 <customcontrols:MainRadioButton Grid.Column="1" Grid.Row="1"
                 Margin="0,10" 
                 GroupName="SexSelector"
                 Content="FEMALE"
                 Value="1"
-                IsChecked="{Binding }">
-                    <customcontrols:MainRadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                    EventName="CheckedChanged"
-                    Command="{Binding BindingContext.SexChangeCommand, Source={x:Reference SexSelectGrid}}"
-                    CommandParameter="1"/>
-                    </customcontrols:MainRadioButton.Behaviors>
-                </customcontrols:MainRadioButton>
+                IsChecked="{Binding SexInput, Converter={StaticResource InverseBoolConveter}}"/>
             </Grid>
 
             <Label Style="{StaticResource Headline}" Text="Calories" VerticalOptions="Center"/>
@@ -145,7 +136,8 @@
             </Border>
 
             <Button Style="{StaticResource MainButton}"
-                Text="AUTO CALCULATE MAKRO" />
+                Text="AUTO CALCULATE MAKRO" 
+                    Command="{Binding AutoCalculateMacrosCommand}"/>
 
             <Label Style="{StaticResource Header}"
                 Text="Kcal"/>
@@ -157,7 +149,7 @@
                 />
             </Border>
 
-            <Grid>
+            <Grid x:Name="MakroTable">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="180"/>
                     <ColumnDefinition Width="*"/>
@@ -180,7 +172,14 @@
                     Background="{StaticResource BackgroundColor}">
                     <Entry PlaceholderColor="{StaticResource TextColor}"
                         Text="{Binding ProteinProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
-                />
+                        MaxLength="2">
+                        
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                            EventName="TextChanged"
+                            Command="{Binding BindingContext.RecalculateMakroInGramsCommand, Source={x:Reference MakroTable}}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </Border>
                 <Label Style="{StaticResource Header}" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                        Text="{Binding ProteinNum}"/>
@@ -192,7 +191,14 @@
                     Background="{StaticResource BackgroundColor}">
                     <Entry PlaceholderColor="{StaticResource TextColor}"
                         Text="{Binding CarbsProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
-/>
+                        MaxLength="2"
+                        >
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding BindingContext.RecalculateMakroInGramsCommand, Source={x:Reference MakroTable}}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </Border>
                 <Label Style="{StaticResource Header}" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                     Text="{Binding CarbsNum}"/>
@@ -203,8 +209,14 @@
                     Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                     Background="{StaticResource BackgroundColor}">
                     <Entry PlaceholderColor="{StaticResource TextColor}"
-                    Text="{Binding FatsProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
-/>
+                           Text="{Binding FatsProcentage}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+                           MaxLength="2">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                             EventName="TextChanged"
+                             Command="{Binding BindingContext.RecalculateMakroInGramsCommand, Source={x:Reference MakroTable}}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </Border>
                 <Label Style="{StaticResource Header}" Grid.Row="5" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                 Text="{Binding FatsNum}"/>
@@ -212,7 +224,11 @@
             </Grid>
 
             <Button Style="{StaticResource DangerButton}"
-                    Text="Save"/>
+                    Text="Save"
+                    Command="{Binding SaveSettingsCommand}"/>
+            <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"
+                   IsVisible="{Binding SettingsChangedErrorVisible}"
+                   Text="{Binding SettingsChangeErrorMessage}"/>
 
         </VerticalStackLayout>
     </ScrollView>

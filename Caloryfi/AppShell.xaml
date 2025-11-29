@@ -11,13 +11,13 @@
     Title="Caloryfi">
 
     <TabBar>
-        <Tab Title="YOUR DAY" Icon="calendar.png" >
+        <Tab Title="HISTORY" Icon="calendar.png" >
             <ShellContent ContentTemplate="{DataTemplate history:HistoryView}"/>
         </Tab>
-        <Tab Title="Workouts" Icon="fork.png">
+        <Tab Title="YOUR DAY" Icon="fork.png">
             <ShellContent ContentTemplate="{DataTemplate yourday:YourDayView}"/>
         </Tab>
-        <Tab Title="Profile" Icon="user.png">
+        <Tab Title="PROFILE" Icon="user.png">
             <ShellContent ContentTemplate="{DataTemplate profile:ProfileView}"/>
         </Tab>
     </TabBar>

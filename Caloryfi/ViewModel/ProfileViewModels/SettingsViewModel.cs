@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         private readonly IServiceProvider _service;
         private readonly UserService _userService;
         private readonly UserSettingsService _userSettingsService;
+        private readonly WeightHistoryService _weightHistoryService;
 
         [ObservableProperty]
         private UserSettingsModel _currentUserSettings;
@@ -43,17 +45,17 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         [ObservableProperty]
         private int _selectedActivityLvl;
         [ObservableProperty]
-        private int _kcalInput;
+        private uint _kcalInput;
         [ObservableProperty]
-        private int _proteinProcentage;
+        private  uint _proteinProcentage;
         [ObservableProperty]
         private int _proteinNum;
         [ObservableProperty]
-        private int _carbsProcentage;
+        private uint _carbsProcentage;
         [ObservableProperty]
         private int _carbsNum;
         [ObservableProperty]
-        private int _fatsProcentage;
+        private uint _fatsProcentage;
         [ObservableProperty]
         private int _fatsNum;
         [ObservableProperty]
@@ -68,13 +70,18 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         private bool _passwordChangedErrorVisible;
         [ObservableProperty]
         private string _passwordChangeErrorMessage;
+        [ObservableProperty]
+        private bool _settingsChangedErrorVisible;
+        [ObservableProperty]
+        private string _settingsChangeErrorMessage;
 
 
-        public SettingsViewModel(IServiceProvider Service, UserService userService, UserSettingsService userSettingsService)
+        public SettingsViewModel(IServiceProvider Service, UserService userService, UserSettingsService userSettingsService, WeightHistoryService weightHistoryService)
         {
             _service = Service;
             _userService = userService;
             _userSettingsService = userSettingsService;
+            _weightHistoryService = weightHistoryService;
 
             UsernameChangedErrorVisible = false;
             EmailChangedErrorVisible = false;
@@ -86,12 +93,12 @@ namespace Caloryfi.ViewModel.ProfileViewModels
             NumberOfMealsInput = _userSettingsService.UserSettings.NumberOfMeals;
             SelectedDietGoal = (int)_userSettingsService.UserSettings.DietGoal;
             SelectedActivityLvl = (int)_userSettingsService.UserSettings.ActivityLevel;
-            KcalInput = (int)_userSettingsService.UserSettings.Kcal;
-            ProteinProcentage = (int)(_userSettingsService.UserSettings.Proteins * 100 );
+            KcalInput = (uint)_userSettingsService.UserSettings.Kcal;
+            ProteinProcentage = (uint)(_userSettingsService.UserSettings.Proteins * 100 );
             ProteinNum = (int)(_userSettingsService.UserSettings.Kcal * _userSettingsService.UserSettings.Proteins / 4);
-            CarbsProcentage = (int)(_userSettingsService.UserSettings.Carbs * 100);
+            CarbsProcentage = (uint)(_userSettingsService.UserSettings.Carbs * 100);
             CarbsNum = (int)(_userSettingsService.UserSettings.Kcal * _userSettingsService.UserSettings.Carbs / 4);
-            FatsProcentage = (int)(_userSettingsService.UserSettings.Fats * 100);
+            FatsProcentage = (uint)(_userSettingsService.UserSettings.Fats * 100);
             FatsNum = (int)(_userSettingsService.UserSettings.Kcal * _userSettingsService.UserSettings.Fats / 9);
 
         }
@@ -168,7 +175,39 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         [RelayCommand]
         private async Task SaveSettings()
         {
-            
+            // chcek if macros add up to 100%
+            if (ProteinProcentage + CarbsProcentage + FatsProcentage != 100)
+            {
+                SettingsChangeErrorMessage = "Macros must add up to 100%";
+                SettingsChangedErrorVisible = true;
+                return;
+            }
+            try
+            {
+                var updatedSettings = new UserSettingsModel
+                {
+                    Id = _userSettingsService.UserSettings.Id,
+                    UserId = _userSettingsService.UserSettings.UserId,
+                    Sex = SexInput,
+                    NumberOfMeals = NumberOfMealsInput,
+                    DietGoal = SelectedDietGoal,
+                    ActivityLevel = SelectedActivityLvl,
+                    Kcal = KcalInput,
+                    Carbs = (Decimal)CarbsProcentage / 100,
+                    Proteins = (Decimal)ProteinProcentage / 100,
+                    Fats = (Decimal)FatsProcentage / 100
+                };
+                var result = await _userSettingsService.UpdateUserSettingsAsync(updatedSettings);
+                SettingsChangeErrorMessage = result.message;
+                SettingsChangedErrorVisible = true;
+                return;
+            }
+            catch
+            {
+                SettingsChangeErrorMessage = "An error occurred while saving settings.";
+                SettingsChangedErrorVisible = true;
+                return;
+            }
         }
 
         [RelayCommand]
@@ -186,6 +225,56 @@ namespace Caloryfi.ViewModel.ProfileViewModels
             {
                 SexInput = false;
             }
+        }
+
+        [RelayCommand]
+        private void AutoCalculateMacros()
+        {
+            double CaloricDemand = _weightHistoryService.CurrentWeight.Weight * 10;
+            if (SexInput) // for female
+            {
+                CaloricDemand += 700;
+            }
+            else //for male
+            {
+                CaloricDemand += 900;
+            }
+            switch (SelectedActivityLvl)
+            {
+                case 0:
+                    CaloricDemand *= 1.2;
+                    break;
+                case 1:
+                    CaloricDemand *= 1.35;
+                    break;
+                case 2:
+                    CaloricDemand *= 1.5;
+                    break;
+                case 3:
+                    CaloricDemand *= 1.65;
+                    break;
+                case 4:
+                    CaloricDemand *= 1.8;
+                    break;
+            }
+
+            KcalInput =  (uint)CaloricDemand;
+
+            ProteinProcentage = 20;
+            ProteinNum = (int)(KcalInput * 0.2 / 4);
+            CarbsProcentage = 50;
+            CarbsNum = (int)(KcalInput * 0.5 / 4);
+            FatsProcentage = 30;
+            FatsNum = (int)(KcalInput * 0.3 / 9);
+            
+        }
+
+        [RelayCommand]
+        private void RecalculateMakroInGrams()
+        {
+            ProteinNum = (int)((KcalInput * ((double)ProteinProcentage / 100)) / 4);
+            CarbsNum = (int)((KcalInput * ((double)CarbsProcentage / 100)) / 4);
+            FatsNum = (int)((KcalInput * ((double)FatsProcentage / 100)) / 9);
         }
     }
 }

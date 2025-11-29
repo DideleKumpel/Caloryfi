@@ -20,17 +20,31 @@
 
             <Label Text="ACTUAL WEIGHT" Style="{StaticResource Big}" FontAttributes="Bold" />
 
-            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Border Padding="8" Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8" Background="{StaticResource BackgroundColor}" VerticalOptions="Center" HeightRequest="56"  WidthRequest="140">
-
-                    <Label Text="{Binding CurrentWeight, StringFormat='{0} kg'}" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextColor}" FontAttributes="Bold" />
-                    
+                <Border Padding="5" Margin="0,0,0,20" Grid.Row="3"
+                        WidthRequest="100"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Background="{StaticResource BackgroundColor}">
+                    <Entry PlaceholderColor="{StaticResource TextColor}"
+                        Text="{Binding CurrentWeight}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"
+                        MaxLength="3"
+                    />
                 </Border>
 
-                <Button Text="UPDATE" Style="{StaticResource MainButton}" Command="{Binding UpdateWeightCommand}" HeightRequest="56" WidthRequest="140" FontSize="17" />
+                <Button Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"
+                    HeightRequest="56" WidthRequest="140" FontSize="17"
+                    Text="UPDATE" Style="{StaticResource MainButton}" Command="{Binding UpdateWeightCommand}" />
                 
-            </HorizontalStackLayout>
+            </Grid>
+
+            <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"
+                   IsVisible="{Binding WeightUpdateMessageIsVisible}"
+                   Text="{Binding WeightUpdateMessage}"/>
 
             <Button Text="SETTINGS" Style="{StaticResource MainButton}" Command="{Binding SwitchToSettingsPageCommand}" HorizontalOptions="Fill" Margin="0,8,0,0"/>
 

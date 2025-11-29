@@ -46,7 +46,7 @@ namespace Caloryfi.Service
         {
             try
             {
-                var response = await _httpClient.PutAsJsonAsync("/api/Setting/UpdateSettings", updatedSettings);
+                var response = await _httpClient.PostAsJsonAsync("/api/Setting/UpdateSettings", updatedSettings);
 
                 if (response.IsSuccessStatusCode)
                 {

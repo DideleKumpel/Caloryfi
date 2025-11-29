@@ -16,6 +16,7 @@ namespace Caloryfi.ViewModel
         private readonly IServiceProvider _serviceProvider;
         private readonly UserService _userService;
         private readonly UserSettingsService _userSettingsService;
+        private readonly WeightHistoryService _weightHistoryService;
 
         [ObservableProperty]
         public string _emailInput;
@@ -54,21 +55,11 @@ namespace Caloryfi.ViewModel
                     LoadingIsVisible = false;
                     return;
                 }
-                var UserDataResult = await _userService.GetUserInfoAsync();
-                if (!UserDataResult)
+                if (await TryDownloadUserData())
                 {
-                    ErrorMessage = "Can't download userdata";
-                    LoadingIsVisible = false;
-                    return;
+                    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
                 }
-                var UserSettingsResult = await _userSettingsService.GetUserSettingsAsync();
-                if (!UserSettingsResult.success)
-                {
-                    ErrorMessage = "Can't download usersettings";
-                    LoadingIsVisible = false;
-                    return;
-                }
-                Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
+                return;
             }
             catch
             {
@@ -84,12 +75,13 @@ namespace Caloryfi.ViewModel
             Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterAccountView>();
         }
 
-        public LoginViewModel(UserService userService, IServiceProvider serviceProvider, UserSettingsService userSettings)
+        public LoginViewModel(UserService userService, IServiceProvider serviceProvider, UserSettingsService userSettings, WeightHistoryService weightHistoryService)
         {
             ErrorMessage = "";
             _userService = userService;
             _serviceProvider = serviceProvider;
             _userSettingsService = userSettings;
+            _weightHistoryService = weightHistoryService;
             _loadingIsVisible = false;
             TryToLogIn();
         }
@@ -106,29 +98,47 @@ namespace Caloryfi.ViewModel
                     return;
                 }
                 bool succes = await _userService.RefreshToken(token);
-                var UserDataResult = await _userService.GetUserInfoAsync();
-                if (!UserDataResult)
+                if (!succes)
                 {
-                    ErrorMessage = "Can't download userdata";
                     LoadingIsVisible = false;
                     return;
                 }
-                var UserSettingsResult = await _userSettingsService.GetUserSettingsAsync();
-                if (!UserSettingsResult.success)
+                if (await TryDownloadUserData())
                 {
-                    ErrorMessage = "Can't download usersettings";
-                    LoadingIsVisible = false;
-                    return;
+                    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>(); 
                 }
-                if (succes)
-                {
-                    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
-                }
+                LoadingIsVisible = false;
+                return;
             }
             catch { }
             LoadingIsVisible = false;
         }
 
+        private async Task<bool> TryDownloadUserData()
+        {
+            var UserDataResult = await _userService.GetUserInfoAsync();
+            if (!UserDataResult)
+            {
+                ErrorMessage = "Can't download userdata";
+                LoadingIsVisible = false;
+                return false;
+            }
+            var UserSettingsResult = await _userSettingsService.GetUserSettingsAsync();
+            if (!UserSettingsResult.success)
+            {
+                ErrorMessage = "Can't download usersettings";
+                LoadingIsVisible = false;
+                return false;
+            }
+            var WeightHistoryResult = await _weightHistoryService.GetCurrentWeightAsync();
+            if (!WeightHistoryResult.success)
+            {
+                ErrorMessage = "Can't download weight history";
+                LoadingIsVisible = false;
+                return false;
+            }
+            return true;
+        }
         private bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
