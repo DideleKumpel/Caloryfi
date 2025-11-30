@@ -1,14 +1,12 @@
 ﻿using Caloryfi.Model;
 using Caloryfi.Service;
+using Caloryfi.View;
+using Caloryfi.Views.DialogPopups;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caloryfi.ViewModel.YourDayViewModels
 {
@@ -79,6 +77,57 @@ namespace Caloryfi.ViewModel.YourDayViewModels
                 { "CurrentMealModel", selectedMeal }
             });
         }
+
+        [RelayCommand]
+        private async Task AddMeal()
+        {
+            var PopupResoult = await Application.Current.MainPage.ShowPopupAsync(new ConformationMessagePopup("Do you want to add meal?"));
+            if (PopupResoult is bool boolResoult)
+            {
+                if (boolResoult == false)
+                {
+                    return;
+                }
+            }
+            var resoult = await _mealService.AddNewMealAsync();
+            if (resoult.succes)
+            {
+                try
+                {
+                    int MealID = int.Parse(resoult.message);
+                    MealModel CreatedMeal = new MealModel
+                    {
+                        Id = MealID,
+                        Ingredients = new ObservableCollection<FoodModel>()
+                    };
+                    MealsList.Add(CreatedMeal);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteMeal(MealModel mealToDelete)
+        {
+            var PopupResoult = await Application.Current.MainPage.ShowPopupAsync(new ConformationMessagePopup("Do you want to delete this meal?"));
+            if (PopupResoult is bool boolResoult)
+            {
+                if (boolResoult == false)
+                {
+                    return;
+                }
+            }
+            var resoult = await _mealService.DeleteMealAsync(mealToDelete.Id);
+            if (resoult.success)
+            {
+                MealsList.Remove(mealToDelete);
+                CalculateTotals();
+            }
+        }
+
 
         private async void LoadToDayMeals()
         {

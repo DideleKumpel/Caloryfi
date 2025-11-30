@@ -34,12 +34,13 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Style="{StaticResource Big}"  Margin="0,0,0,20"
-                                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                           Text="Meal 1"/>
-                                    <Button Style="{StaticResource MainButton}" Grid.Column="1" Margin="0,0,0,20"
-                                            Text="Details"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=SwitchToMealDetailsCommand}"
+                                    <Button Style="{StaticResource MainButton}" Margin="0,0,0,20"
+                                        Text="Details"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=SwitchToMealDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                    <Button Style="{StaticResource DangerButton}" Grid.Column="1" Margin="0,0,0,20"
+                                            Text="Delete"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=DeleteMealCommand}"
                                             CommandParameter="{Binding .}"/>
                                     <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="1"
                                         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
@@ -144,6 +145,14 @@
 
             </Grid>
         </Border>
+        <!-- ADD BUTTON !-->
+        <Button Style="{StaticResource RoundGreenAddButton}"
+        HorizontalOptions="End" VerticalOptions="End"
+        Margin="20"
+        Command="{Binding AddMealCommand}"
+        HeightRequest="120" WidthRequest="120"
+        CornerRadius="60" FontSize="60"
+        Shadow="#000000 1 2"/>
 
         <!-- Loading screen !-->
         <Border Grid.Row="0" Grid.RowSpan="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">

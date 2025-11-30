@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns:local="clr-namespace:Caloryfi.Views.DialogPopups"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="Caloryfi.Views.DialogPopups.ConformationMessagePopup"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             Color="Transparent"
+               >
+
+    <Border Padding="20"
+            Stroke="{StaticResource PrimaryColor}" StrokeThickness="4" StrokeShape="RoundRectangle 30"
+            BackgroundColor="{StaticResource SecondaryBackgroundColor}">
+        <VerticalStackLayout Spacing="10">
+            <Button Style="{StaticResource TextBtn}" x:Name="MessageLabel"
+                Text="Message"
+                HorizontalOptions="Center" />
+            <HorizontalStackLayout Margin="0,20,0,0" HorizontalOptions="Center" Spacing="15">
+                <Button Text="Yes"
+                    Style="{StaticResource  DangerButton}"
+                        Clicked="BtnYesClicked"
+                     />
+                <Button Text="No"
+                    Style="{StaticResource MainButton}"
+                        Clicked="BtnNoClicked"
+                    />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>
