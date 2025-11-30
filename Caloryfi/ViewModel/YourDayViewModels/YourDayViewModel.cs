@@ -144,6 +144,11 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             LoadingIsVisible = false;
         }
 
+        partial void OnMealsListChanged(ObservableCollection<MealModel>? oldValue, ObservableCollection<MealModel> newValue)
+        {
+            CalculateTotals();
+        }
+
         private void CalculateTotals()
         {
             TotalCaloriesForToday = MealsList.Sum(meal => meal.Calories);

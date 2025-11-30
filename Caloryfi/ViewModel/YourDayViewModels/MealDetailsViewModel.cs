@@ -21,6 +21,7 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         private void AddFood()
         {
             // Logic to add food to the meal
+           
         }
 
         [RelayCommand]

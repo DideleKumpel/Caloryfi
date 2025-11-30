@@ -75,7 +75,9 @@
 
                                     <Button Style="{StaticResource MainButton}" Margin="5"
                                             Grid.Row="6" Grid.ColumnSpan="2"
-                                            Text="CHANGE WEIGHT"/>
+                                            Text="CHANGE WEIGHT"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MealDetailsViewModel}}, Path=ChangeFoodDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
                                     <Button Style="{StaticResource DangerButton}" Margin="5"
                                             Grid.Row="7" Grid.ColumnSpan="2"
                                             Text="DELETE"/>
