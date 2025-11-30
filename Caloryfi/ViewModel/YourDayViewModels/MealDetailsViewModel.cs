@@ -1,4 +1,6 @@
 ﻿using Caloryfi.Model;
+using Caloryfi.Model.DTO;
+using Caloryfi.Service;
 using Caloryfi.View.YourDayViews;
 using Caloryfi.Views.DialogPopups;
 using CommunityToolkit.Maui.Views;
@@ -14,8 +16,15 @@ namespace Caloryfi.ViewModel.YourDayViewModels
 {
     public partial class MealDetailsViewModel : ObservableObject
     {
+        private readonly MealComponentService _mealComponentService;
+
         [ObservableProperty]
         private MealModel _meal;
+
+        public MealDetailsViewModel(MealComponentService mealComponentService)
+        {
+            _mealComponentService = mealComponentService;
+        }
 
         [RelayCommand]
         private void AddFood()
@@ -39,16 +48,49 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             {
                 if (double.TryParse(weightString, out double newWeight))
                 {
-                    selectedFood.Weight = newWeight;
-                    // Update other nutritional values based on the new weight if necessary
+                    MealComponentDTO UpdatedMeal = new MealComponentDTO
+                    {
+                        MealId = _meal.Id,
+                        IngredientId = selectedFood.Id,
+                        Weight = newWeight
+                    };
+                    var resoult = await _mealComponentService.UpdateMealComponentWeightAsync(UpdatedMeal);
+                    if (!resoult.success)
+                    {
+                        var ErrorPopup = await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(resoult.message));
+                    }
+                    else
+                    {
+                        selectedFood.Weight = newWeight;
+                    }
                 }
             }
         }
 
         [RelayCommand]
-        private void DeleteFood(FoodModel selectedFood)
+        private async void DeleteFood(FoodModel selectedFood)
         {
-            // Logic to delete food from the meal
+            var PopupResoult = await Application.Current.MainPage.ShowPopupAsync(new ConformationMessagePopup("Do you want to delete this component?."));
+            if (PopupResoult is bool boolResoult)
+            {
+                if (boolResoult == false)
+                {
+                    return;
+                }
+                else
+                {
+                    var resoult = await _mealComponentService.DeleteMealComponentAsync(_meal.Id, selectedFood.Id);
+                    if (true)
+                    {
+                        _meal.Ingredients.Remove(selectedFood);
+                        //OnPropertyChanged(nameof(Meal));
+                    }
+                    else
+                    {
+                        var ErrorPopup = await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(resoult.message));
+                    }
+                }
+            }
         }
 
         [RelayCommand]

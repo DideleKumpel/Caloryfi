@@ -80,7 +80,9 @@
                                             CommandParameter="{Binding .}"/>
                                     <Button Style="{StaticResource DangerButton}" Margin="5"
                                             Grid.Row="7" Grid.ColumnSpan="2"
-                                            Text="DELETE"/>
+                                            Text="DELETE"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MealDetailsViewModel}}, Path=DeleteFoodCommand}"
+                                            CommandParameter="{Binding .}"/>
 
                                 </Grid>
                             </Border>

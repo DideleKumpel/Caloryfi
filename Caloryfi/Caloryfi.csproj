@@ -73,6 +73,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\DialogPopup\MessagePopup.xaml.cs">
+	    <DependentUpon>MessagePopup.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\DialogPopup\InputPopup.xaml.cs">
 	    <DependentUpon>InputPopup.xaml</DependentUpon>
 	  </Compile>
@@ -86,6 +89,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\StylesCaloryfi.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\DialogPopup\MessagePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\DialogPopup\InputPopup.xaml">
