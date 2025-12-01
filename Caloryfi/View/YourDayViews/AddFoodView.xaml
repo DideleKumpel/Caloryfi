@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
     xmlns:model="clr-namespace:Caloryfi.Model"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:DataType="viewmodel:AddFoodViewModel"
     x:Class="Caloryfi.View.YourDayViews.AddFoodView"
     Title="ADD FOOD">
@@ -18,8 +19,15 @@
             <Border Padding="5" Margin="0,0,0,20"
             Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
             Background="{StaticResource BackgroundColor}">
-            <Entry Placeholder="Search"
-            Text="{Binding SearchText}" />
+                <SearchBar Placeholder="Search" x:Name="SearchIngredintBorder"
+                        Text="{Binding SearchText}">
+                    <SearchBar.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            EventName="TextChanged"
+                            Command="{Binding BindingContext.SearchIngredientsCommand, Source={x:Reference SearchIngredintBorder}}"
+                            CommandParameter="{Binding BindingContext, Source={x:Reference ExerciseSearchBar}}"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
             </Border>
             
 
@@ -47,7 +55,7 @@
         </VerticalStackLayout>
 
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Ingredients}"
+                        ItemsSource="{Binding IngredientsDispalay}"
                         Margin="0,20,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:IngriedentsModel">
@@ -73,43 +81,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <Grid
-            Grid.RowSpan="2"
-            BackgroundColor="#80000000"
-            IsVisible="{Binding PopupVisible}"
-            x:Name="RootPage">
-
-            <Grid HorizontalOptions="Center"
-                  VerticalOptions="Center"
-                  Padding="20"
-                  BackgroundColor="{StaticResource SecondaryColor}"
-                  WidthRequest="300"
-                  RowDefinitions="Auto,Auto,Auto,Auto">
-
-                <Label Text="YOU WANT TO ADD"
-                       Style="{StaticResource Big}"
-                       HorizontalOptions="Center"/>
-
-                <Label Text="{Binding SelectedIngredient.Name}"
-                       Style="{StaticResource Header}"
-                       HorizontalOptions="Center"/>
-
-                <Entry Placeholder="ENTER WEIGHT"
-                       Text="{Binding EnteredWeight}"/>
-
-                <HorizontalStackLayout Spacing="15"
-                                       HorizontalOptions="Center">
-                    <Button Text="ADD"
-                            Style="{StaticResource MainButton}"
-                            Command="{Binding ConfirmAddIngredientCommand}"/>
-
-                    <Button Text="CANCEL"
-                            Style="{StaticResource DangerButton}"
-                            Command="{Binding CancelPopupCommand}"/>
-                </HorizontalStackLayout>
-            </Grid>
-        </Grid>
 
         <!-- Loading screen !-->
         <Border Grid.Row="1" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">

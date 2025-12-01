@@ -40,6 +40,8 @@ public partial class AddFoodViewModel : ObservableObject
     string _enteredWeight;
 
     [ObservableProperty]
+    private ObservableCollection<IngriedentsModel> _ingredientsDispalay;
+
     private ObservableCollection<IngriedentsModel> _ingredients;
 
     public AddFoodViewModel(IngredientsService ingredientsService, MealComponentService mealComponentService)
@@ -104,14 +106,36 @@ public partial class AddFoodViewModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    private void SearchIngredients()
+    {
+        if (string.IsNullOrWhiteSpace(SearchText))
+        {
+            IngredientsDispalay = new ObservableCollection<IngriedentsModel>(_ingredients);
+        }
+        else
+        {
+            IngredientsDispalay.Clear();
+            var lowerSearchText = SearchText.ToLower();
+            foreach (var ingredient in _ingredients)
+            {
+                bool isVisible = ingredient.Name.ToLower().Contains(lowerSearchText);
+                if (isVisible)
+                {
+                    IngredientsDispalay.Add(ingredient);
+                }
+            }
+        }
+    }
     private async void LoadIngredients()
     {
         LoadingIsVisible = true;
         var resoult = await _ingredientsService.GetIngredientsAsync();
         if (resoult.success)
         {
-            Ingredients = JsonConvert.DeserializeObject<ObservableCollection<IngriedentsModel>>(resoult.message);
+            _ingredients = JsonConvert.DeserializeObject<ObservableCollection<IngriedentsModel>>(resoult.message);
             LoadingIsVisible = false;
+            IngredientsDispalay = new ObservableCollection<IngriedentsModel>(_ingredients);
         }
         else
         {
