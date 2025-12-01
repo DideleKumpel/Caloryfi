@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
     xmlns:model="clr-namespace:Caloryfi.Model"
+    x:DataType="viewmodel:AddFoodViewModel"
     x:Class="Caloryfi.View.YourDayViews.AddFoodView"
     Title="ADD FOOD">
 
@@ -49,7 +50,7 @@
                         ItemsSource="{Binding Ingredients}"
                         Margin="0,20,0,0">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:IngriedentsModel">
                     <Border Padding="15" Margin="10"
                     StrokeShape="RoundRectangle 30" StrokeThickness="0"
                     Background="{StaticResource SecondaryBackgroundColor}">
@@ -65,8 +66,8 @@
 
                             <Button Grid.Column="1"
                                 Style="{StaticResource RoundGreenAddButton}"
-                                Command="{Binding BindingContext.OpenAddWeightPopupCommand, Source={x:Reference Name=RootPage}}"
-                                CommandParameter="{Binding}" />
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddFoodViewModel}}, Path=AddIngredientCommand}"
+                                CommandParameter="{Binding .}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -109,6 +110,25 @@
                 </HorizontalStackLayout>
             </Grid>
         </Grid>
+
+        <!-- Loading screen !-->
+        <Border Grid.Row="1" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+            <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+        <!-- Error screen-->
+        <Border Grid.Row="1" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding ErrorMessageVisible}" Padding="20">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="no_connection_icon.png" 
+                    HeightRequest="100"
+                    Aspect="AspectFit"
+                    Margin="0"/>
+                <Label Style="{StaticResource Big}" Text="Error ocurded while loading meals."
+                    HorizontalOptions="Center"
+                />
+                <Label Style="{StaticResource Medium}" Text="Check your internet connection and reload app."
+                    HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
 
     </Grid>
 </ContentPage>

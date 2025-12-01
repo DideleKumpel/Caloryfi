@@ -48,5 +48,21 @@ namespace Caloryfi.Service
                 return (false, $"Error: {ex.Message}");
             }
         }
+
+        public async Task<(bool success, string message)> AddMealComponentAsync(MealComponentDTO newMealComponent)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("/api/MealComponent/AddComponent", newMealComponent);
+                if (!response.IsSuccessStatusCode)
+                    return (false, "Failed to add meal component");
+                var result = await response.Content.ReadAsStringAsync();
+                return (true, result);
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Error: {ex.Message}");
+            }
+        }
     }
 }

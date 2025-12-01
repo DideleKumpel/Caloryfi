@@ -80,10 +80,9 @@ namespace Caloryfi.ViewModel.YourDayViewModels
                 else
                 {
                     var resoult = await _mealComponentService.DeleteMealComponentAsync(_meal.Id, selectedFood.Id);
-                    if (true)
+                    if (resoult.succes)
                     {
                         _meal.Ingredients.Remove(selectedFood);
-                        //OnPropertyChanged(nameof(Meal));
                     }
                     else
                     {
@@ -94,9 +93,12 @@ namespace Caloryfi.ViewModel.YourDayViewModels
         }
 
         [RelayCommand]
-        private void SwitchToAddFoodPage()
+        private async void SwitchToAddFoodPage()
         {
-            Shell.Current.GoToAsync(nameof(AddFoodView));
+            await Shell.Current.GoToAsync(nameof(View.YourDayViews.AddFoodView), new Dictionary<string, object>
+            {
+                { "CurrentMealModel", Meal }
+            });
         }
     }
 }

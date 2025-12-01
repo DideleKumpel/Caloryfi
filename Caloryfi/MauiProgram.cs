@@ -21,7 +21,7 @@ namespace Caloryfi
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             {
-                var apiBaseUrl = "https://d4d2181e16f6.ngrok-free.app";
+                var apiBaseUrl = "https://7906221ac9c9.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {
@@ -46,6 +46,7 @@ namespace Caloryfi
             builder.Services.AddSingleton<Service.MealService>();
             builder.Services.AddSingleton<Service.WeightHistoryService>();
             builder.Services.AddSingleton<Service.MealComponentService>();
+            builder.Services.AddSingleton<Service.IngredientsService>();
 
             //VIEW
             builder.Services.AddTransient<View.LoginView>();
