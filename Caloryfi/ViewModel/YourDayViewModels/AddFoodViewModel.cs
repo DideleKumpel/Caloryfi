@@ -2,6 +2,7 @@
 using Caloryfi.Model.DTO;
 using Caloryfi.Service;
 using Caloryfi.Service;
+using Caloryfi.View.YourDayViews;
 using Caloryfi.Views.DialogPopups;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -142,6 +143,11 @@ public partial class AddFoodViewModel : ObservableObject
             LoadingIsVisible = false;
             ErrorMessageVisible = true;
         }
+    }
+    [RelayCommand]
+    private void GoToCustomIngredient()
+    {
+        Shell.Current.GoToAsync(nameof(AddCustomIngredientView));
     }
 
 }

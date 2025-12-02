@@ -33,7 +33,7 @@
 
             <HorizontalStackLayout Spacing="10">
                 <Border Padding="5" Margin="0,0,0,20"
-                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
                 <Button Text="TAKE PICTURE OF MEAL"
                         Style="{StaticResource TextBtn}"
@@ -43,7 +43,7 @@
                 </Border>
 
                 <Border Padding="5" Margin="0,0,0,20"
-                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
                 <Button Text="CUSTOM INGREDIENT"
                         Style="{StaticResource TextBtn}"

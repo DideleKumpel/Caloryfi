@@ -1,0 +1,97 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
+    xmlns:model="clr-namespace:Caloryfi.Model"
+    x:DataType="viewmodel:AddCustomIngredientViewModel"
+    x:Class="Caloryfi.View.YourDayViews.AddCustomIngredientView"
+    Title="CUSTOM INGREDIENT">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                    Background="{StaticResource BackgroundColor}"
+                    HeightRequest="60">
+                <Entry Placeholder="INGREDIENT NAME"
+                   Text="{Binding Name}"/>
+            </Border>
+            
+            <Label Style="{StaticResource Big}" Text="WEIGHT:"/>
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                    Background="{StaticResource BackgroundColor}"
+                    HeightRequest="60">
+                <Entry Placeholder="WEIGHT:"
+                       Keyboard="Numeric"
+                       Text="{Binding Weight}"/>
+            </Border>
+            
+            <Border Padding="0" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
+                    WidthRequest="120"
+                    HeightRequest="60"
+                    BackgroundColor="White"
+                    HorizontalOptions="Start">
+                <Button Text="AUTOFILL"
+                    Style="{StaticResource TextBtn}"
+                    Command="{Binding AutoFillCommand}"/>
+            </Border>
+            
+            <Label Style="{StaticResource Big}" Text="KCAL per 100g"/>
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                Background="{StaticResource BackgroundColor}"
+                HeightRequest="60">
+                <Entry Placeholder="KCAL per 100g"
+                   Keyboard="Numeric"
+                   Text="{Binding Kcal}"/>
+            </Border>
+            
+            <Label Style="{StaticResource Big}" Text="PROTEIN per 100g"/>
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                Background="{StaticResource BackgroundColor}"
+                HeightRequest="60">
+                <Entry Placeholder="PROTEIN per 100g"
+                   Keyboard="Numeric"
+                   Text="{Binding Proteins}"/>
+            </Border>
+            <Label Style="{StaticResource Big}" Text="CARBS per 100g"/>
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                Background="{StaticResource BackgroundColor}"
+                HeightRequest="60">
+                <Entry Placeholder="CARBS per 100g"
+                   Keyboard="Numeric"
+                   Text="{Binding Carbs}"/>
+            </Border>
+            
+            <Label Style="{StaticResource Big}" Text="FATS per 100g"/>
+            
+            <Border Padding="5" Margin="0,0,0,0"
+                Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                HeightRequest="60"
+                Background="{StaticResource BackgroundColor}">
+                <Entry Placeholder="FATS per 100g"
+                   Keyboard="Numeric"
+                   Text="{Binding Fats}"/>
+            </Border>
+            
+            <Border Padding="5" Margin="0,20,0,20"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
+                    BackgroundColor="White"
+                    HeightRequest="65">
+                <Button Text="ADD"
+                    Style="{StaticResource TextBtn}"
+                    Command="{Binding AddIngredientCommand}"/>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
