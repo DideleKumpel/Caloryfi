@@ -1,7 +1,7 @@
 ﻿using Caloryfi.Model;
 using Caloryfi.Model.DTO;
 using Caloryfi.Service;
-using Caloryfi.Service;
+using Caloryfi.View;
 using Caloryfi.Views.DialogPopups;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,12 +13,28 @@ namespace Caloryfi.ViewModel.YourDayViewModels;
 
 public partial class AddCustomIngredientViewModel : ObservableObject
 {
+    private readonly IngredientsService _ingredientsService;
+    private readonly MealComponentService _mealComponentService;
+
+    private AddFoodViewModel _addFoodViewModel;
+    public AddFoodViewModel AddFoodViewModel
+    {
+        set { _addFoodViewModel = value; }
+    }
+
     [ObservableProperty] string _name;
-    [ObservableProperty] int _weight;
-    [ObservableProperty] int _kcal;
-    [ObservableProperty] int _proteins;
-    [ObservableProperty] int _carbs;
-    [ObservableProperty] int _fats;
+    [ObservableProperty] uint _weight;
+    [ObservableProperty] uint _kcal;
+    [ObservableProperty] uint _proteins;
+    [ObservableProperty] uint _carbs;
+    [ObservableProperty] uint _fats;
+
+
+    public AddCustomIngredientViewModel(IngredientsService ingredientsService, MealComponentService mealComponentService)
+    {
+        _ingredientsService = ingredientsService;
+        _mealComponentService = mealComponentService;
+    }
 
     [RelayCommand]
     void AutoFill()
@@ -27,8 +43,78 @@ public partial class AddCustomIngredientViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void AddIngredient()
+    private async void AddIngredient()
     {
-        // TODO: save ingredient
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            await Application.Current.MainPage.ShowPopupAsync(new MessagePopup("Please enter a valid name for the ingredient."));
+            return;
+        }
+        if(Kcal <=0 || Proteins <0 || Carbs <0 || Fats <0)
+        {
+            await Application.Current.MainPage.ShowPopupAsync(new MessagePopup("Please enter valid nutritional values."));
+            return;
+        }
+        IngriedentsModel newIngredient = new IngriedentsModel
+        {
+            Name = Name,
+            Kcal = (int)Kcal,
+            Proteins = (int)Proteins,
+            Carbs = (int)Carbs,
+            Fats = (int)Fats
+        };
+        var resoult = await _ingredientsService.AddCustomIngredientAsync(newIngredient); //adding ingredient to databse
+        if (!resoult.success)
+        {
+            await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(resoult.message));
+            return;
+        }
+        else
+        {
+            try
+            {
+                int newIngredientId = int.Parse(resoult.message); //getting the id of the newly added ingredient
+
+                if (Weight > 0) //adding ingredient to the meal on phone and in DB if weight is greater than 0
+                {
+                    FoodModel newFood = new FoodModel
+                    {
+                        Id = newIngredientId,
+                        Weight = Weight,
+                        Name = Name,
+                        Kcal = (int)Kcal,
+                        Proteins = (int)Proteins,
+                        Carbs = (int)Carbs,
+                        Fats = (int)Fats
+                    };
+                    MealComponentDTO newMealComponent = new MealComponentDTO
+                    {
+                        MealId = _addFoodViewModel.CurrentMeal.Id,
+                        IngredientId = newFood.Id,
+                        Weight = Weight
+                    };
+                    var addFoodResoult = await _mealComponentService.AddMealComponentAsync(newMealComponent);
+                    if (addFoodResoult.success)
+                    {
+                        _addFoodViewModel.CurrentMeal.Ingredients.Add(newFood);
+                        await Shell.Current.GoToAsync("../..");
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(addFoodResoult.message));
+                        Weight = 0; //seting weight to 0 so second if will add this ingriednt to ingrident search list
+                    }
+                }
+                if(Weight == 0) //adding ingredient to ingrident search list on phone
+                {
+                    _addFoodViewModel.Ingredients.Add(newIngredient);
+                    await Shell.Current.GoToAsync("..");
+                }
+            }
+            catch
+            {
+                await Shell.Current.GoToAsync("..");
+            }
+        }
     }
 }

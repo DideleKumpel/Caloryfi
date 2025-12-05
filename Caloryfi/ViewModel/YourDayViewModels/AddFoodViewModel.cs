@@ -20,7 +20,7 @@ public partial class AddFoodViewModel : ObservableObject
     private MealModel _curentMeal;
     public MealModel CurrentMeal
     {
-        set { _curentMeal = value; }
+        set { _curentMeal = value; } get { return _curentMeal; }
     }
 
     [ObservableProperty]
@@ -44,6 +44,11 @@ public partial class AddFoodViewModel : ObservableObject
     private ObservableCollection<IngriedentsModel> _ingredientsDispalay;
 
     private ObservableCollection<IngriedentsModel> _ingredients;
+
+    public ObservableCollection<IngriedentsModel> Ingredients
+    {
+        get { return _ingredients; } set { _ingredients = value; }
+    }
 
     public AddFoodViewModel(IngredientsService ingredientsService, MealComponentService mealComponentService)
     {
@@ -145,9 +150,11 @@ public partial class AddFoodViewModel : ObservableObject
         }
     }
     [RelayCommand]
-    private void GoToCustomIngredient()
+    private async void GoToCustomIngredient()
     {
-        Shell.Current.GoToAsync(nameof(AddCustomIngredientView));
+        await Shell.Current.GoToAsync(nameof(View.YourDayViews.AddCustomIngredientView), new Dictionary<string, object>
+            {
+                { "AddFoodViewModel", this }
+            });
     }
-
 }
