@@ -19,7 +19,7 @@ namespace Caloryfi.Service
         {
             try
             {
-                var response = await _httpClient.GetAsync($"/api/GeminiApi/AutoCalculateIngredientmMakroAsync/{ingredeintName}");
+                var response = await _httpClient.GetAsync($"/api/GeminiApi/AutoCalculateIngredientmMakro/{ingredeintName}");
                 if (!response.IsSuccessStatusCode)
                     return (false, "Failed to fetch AI response");
                 var result = await response.Content.ReadAsStringAsync();

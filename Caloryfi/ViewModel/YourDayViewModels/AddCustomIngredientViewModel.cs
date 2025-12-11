@@ -50,13 +50,13 @@ public partial class AddCustomIngredientViewModel : ObservableObject
         {
             try
             {
-                var makroValues = JsonConvert.DeserializeObject<Dictionary<string, uint>>(resoult.message);
-                Kcal = makroValues["Kcal"];
-                Proteins = makroValues["Proteins"];
-                Carbs = makroValues["Carbs"];
-                Fats = makroValues["Fats"];
+                var makroValues = JsonConvert.DeserializeObject<IngriedentsModel>(resoult.message);
+                Kcal = (uint)makroValues.Kcal;
+                Proteins = (uint)makroValues.Proteins;
+                Carbs = (uint)makroValues.Carbs;
+                Fats = (uint)makroValues.Fats;
             }
-            catch
+            catch(Exception e)
             {
                 //ignore error
             }
