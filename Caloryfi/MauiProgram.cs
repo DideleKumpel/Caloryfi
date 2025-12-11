@@ -47,6 +47,7 @@ namespace Caloryfi
             builder.Services.AddSingleton<Service.WeightHistoryService>();
             builder.Services.AddSingleton<Service.MealComponentService>();
             builder.Services.AddSingleton<Service.IngredientsService>();
+            builder.Services.AddSingleton<Service.AIService>();
 
             //VIEW
             builder.Services.AddTransient<View.LoginView>();

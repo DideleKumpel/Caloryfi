@@ -15,6 +15,7 @@ public partial class AddCustomIngredientViewModel : ObservableObject
 {
     private readonly IngredientsService _ingredientsService;
     private readonly MealComponentService _mealComponentService;
+    private readonly AIService _aIService;
 
     private AddFoodViewModel _addFoodViewModel;
     public AddFoodViewModel AddFoodViewModel
@@ -30,16 +31,36 @@ public partial class AddCustomIngredientViewModel : ObservableObject
     [ObservableProperty] uint _fats;
 
 
-    public AddCustomIngredientViewModel(IngredientsService ingredientsService, MealComponentService mealComponentService)
+    public AddCustomIngredientViewModel(IngredientsService ingredientsService, MealComponentService mealComponentService, AIService aIService)
     {
         _ingredientsService = ingredientsService;
         _mealComponentService = mealComponentService;
+        _aIService = aIService;
     }
 
     [RelayCommand]
-    void AutoFill()
+    async void AutoFill()
     {
-        // TODO: autofill from database
+        if(string.IsNullOrWhiteSpace(Name))
+        {
+            return;
+        }
+        var resoult = await _aIService.AutoCalculateIngredientmMakroAsync(Name);
+        if(resoult.success)
+        {
+            try
+            {
+                var makroValues = JsonConvert.DeserializeObject<Dictionary<string, uint>>(resoult.message);
+                Kcal = makroValues["Kcal"];
+                Proteins = makroValues["Proteins"];
+                Carbs = makroValues["Carbs"];
+                Fats = makroValues["Fats"];
+            }
+            catch
+            {
+                //ignore error
+            }
+        }
     }
 
     [RelayCommand]
