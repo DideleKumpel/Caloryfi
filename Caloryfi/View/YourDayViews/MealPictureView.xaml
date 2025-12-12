@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Caloryfi.View.YourDayViews.MealPictureView"
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
+    xmlns:model="clr-namespace:Caloryfi.Model"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="viewmodel:MealPictureViewModel"
+    x:Class="Caloryfi.View.YourDayViews.MealPictureView"
              xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
              xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:MealDetailsViewModel"
              Title="Meal Picture">
+    Title="MEAL PICTURE">
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
             <Label Style="{StaticResource Header}"
@@ -17,6 +25,13 @@
                     Text="{Binding MealName}" TextColor="{StaticResource TextColor}" FontSize="16"
                     Keyboard="Default"
                     />
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Border Padding="5" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                    Background="{StaticResource BackgroundColor}"
+                    HeightRequest="60">
+                <Entry Placeholder="MEAL NAME" Text="{Binding Name}"/>
             </Border>
             <Label Style="{StaticResource Header}"
                 Text="Meal name"/>
@@ -27,27 +42,46 @@
                     Text="{Binding MealName}" TextColor="{StaticResource TextColor}" FontSize="16"
                     Keyboard="Default"
                 />
+
+            <Label Style="{StaticResource Big}" Text="WEIGHT:"/>
+
+            <Border Padding="5" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="5"
+                    Background="{StaticResource BackgroundColor}"
+                    HeightRequest="60">
+                 <Entry Keyboard="Numeric"
+                        Text="{Binding Weight}"/>
             </Border>
             <Button Style="{StaticResource MainButton}"
                     Text="Load picture"/>
             <Grid>
-                <Border Padding="15" Margin="10"
+
+            <Border Padding="0" Margin="0,0,0,0"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
+                    WidthRequest="160"
+                    HeightRequest="60"
+                    BackgroundColor="White"
+                    HorizontalOptions="Start">
+                <Button Text="Load Picture" Style="{StaticResource TextBtn}" Command="{Binding LoadPictureCommand}"/>
+            </Border>
+
+            <Border Padding="15" Margin="10"
                     StrokeShape="RoundRectangle 30" StrokeThickness="0"
-                 Background="{StaticResource SecondaryBackgroundColor}">
+                    Background="{StaticResource SecondaryBackgroundColor}">
                     <Grid Padding="5">
-                        <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
                         <Label Style="{StaticResource Header}" Margin="0,0,0,10"
                             Grid.ColumnSpan="2" 
@@ -82,16 +116,53 @@
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="4" Grid.Column="2"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                            Text="Fats"/>
+                    <Label Style="{StaticResource Big}" HorizontalOptions="Center"  Grid.ColumnSpan="2" Margin="0,0,0,20" Text="Estimated Nutritional Values"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="1"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="Calories"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="2"
+                           Margin="0,0,0,20"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="{Binding Calories}"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="3"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="Fats"/>
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="5" Grid.Column="2"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                             Text="{Binding FoodFats}"/>
-                    </Grid>
-                </Border>
+                    <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="4"
+                           Margin="0,0,0,20"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="{Binding Fats,StringFormat='{0}g'}"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="1"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="Protein"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="2"
+                           Margin="0,0,0,20"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="{Binding Proteins,StringFormat='{0}g'}"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="3"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="Carbs"/>
+                    <Label Style="{StaticResource Big}" Grid.Column="1" Grid.Row="4"
+                           Margin="0,0,0,20"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           Text="{Binding Carbs,StringFormat='{0}g'}"/>
+                </Grid>
+
+            </Border>
+
+            <Border Padding="5" Margin="0,20,0,20"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
+                    BackgroundColor="White"
+                    HeightRequest="65">
+                <Button Text="ADD" Style="{StaticResource TextBtn}" Command="{Binding AddMealCommand}"/>
+            </Border>
             </Grid>
             <Button Style="{StaticResource MainButton}"
                 Text="Add"/>
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

@@ -13,6 +13,7 @@ namespace Caloryfi
             Routing.RegisterRoute(nameof(MealDetailsView), typeof(MealDetailsView));
             Routing.RegisterRoute(nameof(AddFoodView), typeof(AddFoodView));
             Routing.RegisterRoute(nameof(AddCustomIngredientView), typeof(AddCustomIngredientView));
+            Routing.RegisterRoute(nameof(MealPictureView), typeof(MealPictureView));
         }
     }
 }
