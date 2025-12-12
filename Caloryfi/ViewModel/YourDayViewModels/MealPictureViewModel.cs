@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caloryfi.ViewModel.YourDayViewModels
 namespace Caloryfi.ViewModel.YourDayViewModels;
 
 public partial class MealPictureViewModel : ObservableObject
@@ -17,6 +18,11 @@ public partial class MealPictureViewModel : ObservableObject
     [ObservableProperty] string carbs;
     [ObservableProperty] string fats;
 
+    public MealPictureViewModel()
+    {
+        // TODO: add meal to list
+    }
+
     [RelayCommand]
     void LoadPicture()
     {
@@ -25,8 +31,8 @@ public partial class MealPictureViewModel : ObservableObject
 
     [RelayCommand]
     void AddMeal()
-    public class MealPictureViewModel
     {
-        // TODO: add meal to list
+
     }
+    
 }
