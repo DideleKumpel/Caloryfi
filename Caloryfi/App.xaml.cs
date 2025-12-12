@@ -1,4 +1,5 @@
 ﻿using Caloryfi.View;
+using Caloryfi.View.YourDayViews;
 
 namespace Caloryfi
 {
@@ -13,7 +14,8 @@ namespace Caloryfi
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            //var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            var loginView = _serviceProvider.GetRequiredService<MealPictureView>();
             return new Window(loginView);
         }
     }
