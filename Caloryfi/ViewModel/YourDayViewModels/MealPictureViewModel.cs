@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Caloryfi.Model;
+using Caloryfi.Views.DialogPopups;
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -10,13 +13,20 @@ namespace Caloryfi.ViewModel.YourDayViewModels;
 
 public partial class MealPictureViewModel : ObservableObject
 {
-    [ObservableProperty] string name;
-    [ObservableProperty] string weight;
+    [ObservableProperty] string _name;
+    [ObservableProperty] string _weight;
 
-    [ObservableProperty] string kcal;
-    [ObservableProperty] string proteins;
-    [ObservableProperty] string carbs;
-    [ObservableProperty] string fats;
+    [ObservableProperty] string _kcal;
+    [ObservableProperty] string _proteins;
+    [ObservableProperty] string _carbs;
+    [ObservableProperty] string _fats;
+
+    private ImageModel _mealImage;
+
+    private static readonly HashSet<string> allowedExtensions = new HashSet<string>
+    {
+        ".jpg", ".jpeg", ".png"
+    };
 
     public MealPictureViewModel()
     {
@@ -24,9 +34,56 @@ public partial class MealPictureViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void LoadPicture()
+    async void LoadPicture()
     {
-        // TODO: open picture, AI recognition etc.
+        try
+        {
+            var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+            {
+                Title = "Choose meal photo"
+            });
+
+            if (result == null)
+                return;
+
+            string fileExtension = System.IO.Path.GetExtension(result.FileName).ToLower();
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                var ErrorPopup = await Application.Current.MainPage.ShowPopupAsync(new MessagePopup("Invalid file type. Please select a JPG or PNG image."));
+                return;
+            }
+
+            // Stream for imgage
+            using var stream = await result.OpenReadAsync();
+
+            // change to  byte[]
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            byte[] imageBytes = memoryStream.ToArray();
+
+            //save image to model
+            _mealImage = new ImageModel
+            {
+                Extension = fileExtension,
+                Data = imageBytes
+            };
+        }
+        catch (Exception ex)
+        {
+            var ErrorPopup = await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(ex.Message));
+        }
+    }
+
+    [RelayCommand]
+    void DeletePicture ()
+    {
+        _mealImage = null;
+    }
+
+        [RelayCommand]
+    async void EstymateMacros()
+    {
+
     }
 
     [RelayCommand]

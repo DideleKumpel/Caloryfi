@@ -4,7 +4,7 @@
              x:Class="Caloryfi.View.YourDayViews.MealPictureView"
              xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
              xmlns:model="clr-namespace:Caloryfi.Model"
-             x:DataType="viewmodels:MealDetailsViewModel"
+             x:DataType="viewmodels:MealPictureViewModel"
              Title="Meal Picture">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
@@ -19,7 +19,7 @@
                     />
             </Border>
             <Label Style="{StaticResource Header}"
-                Text="Meal name"/>
+                Text="Weight (grams)"/>
             <Border Padding="5" Margin="0,0,0,20"
                 Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
@@ -29,7 +29,14 @@
                 />
             </Border>
             <Button Style="{StaticResource MainButton}"
-                    Text="Load picture"/>
+                    Text="Load picture"
+                    Command="{Binding LoadPictureCommand}"/>
+            <Button Style="{StaticResource DangerButton}"
+                    Text="Remove picture"
+                    Command="{Binding LoadPictureCommand}"/>
+            <Button Style="{StaticResource MainButton}"
+                    Text="Estymate"
+                    Command="{Binding EstymateMacrosCommand}"/>
             <Grid>
                 <Border Padding="15" Margin="10"
                     StrokeShape="RoundRectangle 30" StrokeThickness="0"
