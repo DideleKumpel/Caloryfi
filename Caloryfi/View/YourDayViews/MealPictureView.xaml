@@ -14,7 +14,7 @@
                 Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
                 <Entry PlaceholderColor="{StaticResource TextColor}"
-                    Text="{Binding MealName}" TextColor="{StaticResource TextColor}" FontSize="16"
+                    Text="{Binding FoodData.Name}" TextColor="{StaticResource TextColor}" FontSize="16"
                     Keyboard="Default"
                     />
             </Border>
@@ -24,7 +24,7 @@
                 Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
                 <Entry PlaceholderColor="{StaticResource TextColor}"
-                    Text="{Binding MealName}" TextColor="{StaticResource TextColor}" FontSize="16"
+                    Text="{Binding FoodData.Weight}" TextColor="{StaticResource TextColor}" FontSize="16"
                     Keyboard="Default"
                 />
             </Border>
@@ -69,7 +69,7 @@
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="3" Grid.Column="0"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                            Text="{Binding FoodKcal}"/>
+                            Text="{Binding FoodData.FoodKcal}"/>
                         <Label Style="{StaticResource Header}" 
                              Grid.Row="4" Grid.Column="0"
                              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
@@ -77,7 +77,7 @@
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="5" Grid.Column="0"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                            Text="{Binding FoodCarbs}"/>
+                            Text="{Binding FoodData.Carbs}"/>
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="2" Grid.Column="1"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
@@ -85,7 +85,7 @@
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="3" Grid.Column="2"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                            Text="{Binding FoodProteins}"/>
+                            Text="{Binding FoodData.Proteins}"/>
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="4" Grid.Column="2"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
@@ -93,12 +93,13 @@
                         <Label Style="{StaticResource Header}" 
                             Grid.Row="5" Grid.Column="2"
                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                            Text="{Binding FoodFats}"/>
+                            Text="{Binding FoodData.Fats}"/>
                     </Grid>
                 </Border>
             </Grid>
             <Button Style="{StaticResource MainButton}"
-                Text="Add"/>
+                    Text="Add"
+                    Command="{Binding AddMealCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
