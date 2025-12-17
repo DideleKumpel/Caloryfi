@@ -100,5 +100,13 @@ namespace Caloryfi.ViewModel.YourDayViewModels
                 { "CurrentMealModel", Meal }
             });
         }
+        [RelayCommand]
+        private async void SwitchToAddMealPage()
+        {
+            await Shell.Current.GoToAsync(nameof(View.YourDayViews.MealPictureView), new Dictionary<string, object>
+            {
+                { "CurrentMealModel", Meal }
+            });
+        }
     }
 }
