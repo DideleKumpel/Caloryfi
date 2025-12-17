@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Caloryfi.Model.DTO;
 
 namespace Caloryfi.Service
 {
@@ -20,6 +22,22 @@ namespace Caloryfi.Service
             try
             {
                 var response = await _httpClient.GetAsync($"/api/GeminiApi/AutoCalculateIngredientmMakro/{ingredeintName}");
+                if (!response.IsSuccessStatusCode)
+                    return (false, "Failed to fetch AI response");
+                var result = await response.Content.ReadAsStringAsync();
+                return (true, result);
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Error: {ex.Message}");
+            }
+        }
+
+        public async Task<(bool success, string message)> GetFoodFromImage(FoodFormImageDTO foodFromImageDTO)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync($"/api/GeminiApi/GetFoodFromImage", foodFromImageDTO);
                 if (!response.IsSuccessStatusCode)
                     return (false, "Failed to fetch AI response");
                 var result = await response.Content.ReadAsStringAsync();
