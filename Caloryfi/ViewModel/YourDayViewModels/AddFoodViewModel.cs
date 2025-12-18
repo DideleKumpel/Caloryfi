@@ -157,9 +157,13 @@ public partial class AddFoodViewModel : ObservableObject
                 { "AddFoodViewModel", this }
             });
     }
+
     [RelayCommand]
-    private void GoToMealPicture()
+    private async void GoToMealPicture()
     {
-        Shell.Current.GoToAsync(nameof(MealPictureView));
+        await Shell.Current.GoToAsync(nameof(MealPictureView), new Dictionary<string, object>
+            {
+                { "AddFoodViewModel", this }
+            });
     }
 }

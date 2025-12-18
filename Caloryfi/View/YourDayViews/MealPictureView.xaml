@@ -33,7 +33,7 @@
                     Command="{Binding LoadPictureCommand}"/>
             <Button Style="{StaticResource DangerButton}"
                     Text="Remove picture"
-                    Command="{Binding LoadPictureCommand}"/>
+                    Command="{Binding DeletePictureCommand}"/>
             <Button Style="{StaticResource MainButton}"
                     Text="Estymate"
                     Command="{Binding EstymateMacrosCommand}"/>

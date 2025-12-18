@@ -41,8 +41,14 @@ public partial class MealPictureViewModel : ObservableObject
     {
         _aIService = aIService;
         _ingredientsService = ingredientsService;
-        FoodData = new FoodModel();
         _mealComponentService = mealComponentService;
+
+        FoodData = new FoodModel();
+        _mealImage = new ImageModel
+        {
+            Data = new byte[] { },
+            Extension = ""
+        };
     }
 
     [RelayCommand]
@@ -89,7 +95,11 @@ public partial class MealPictureViewModel : ObservableObject
     [RelayCommand]
     void DeletePicture ()
     {
-        _mealImage = null;
+        _mealImage = new ImageModel
+        {
+            Data = new byte[] {},
+            Extension = ""
+        };
     }
 
    [RelayCommand]
@@ -111,6 +121,17 @@ public partial class MealPictureViewModel : ObservableObject
                 FoodData.Proteins = makroValues.Proteins;
                 FoodData.Carbs = makroValues.Carbs;
                 FoodData.Fats = makroValues.Fats;
+
+                FoodData = new FoodModel
+                {
+                    Id = FoodData.Id,
+                    Name = FoodData.Name,
+                    Weight = FoodData.Weight,
+                    Kcal = makroValues.Kcal,
+                    Proteins = makroValues.Proteins,
+                    Carbs = makroValues.Carbs,
+                    Fats = makroValues.Fats
+                };
             }
             catch (Exception ex)
             {

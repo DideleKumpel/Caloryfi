@@ -4,21 +4,22 @@ using Caloryfi.ViewModel.YourDayViewModels;
 
 namespace Caloryfi.View.YourDayViews;
 
-[QueryProperty(nameof(CurrentMealModel), "CurrentMealModel")]
+[QueryProperty(nameof(AddFoodViewModel), "AddFoodViewModel")]
 public partial class MealPictureView : ContentPage
 {
-    private readonly MealDetailsViewModel _viewModel;
+    private readonly MealPictureViewModel _viewModel;
 
-    public MealModel CurrentMealModel
+    public AddFoodViewModel AddFoodViewModel
     {
         set
         {
-            _viewModel.Meal = value;
+            _viewModel.AddFoodViewModel = value;
         }
     }
     public MealPictureView(MealPictureViewModel vm)
 	{
-		BindingContext = vm;
+        _viewModel = vm;
+        BindingContext = vm;
 		InitializeComponent();
 	}
 }
