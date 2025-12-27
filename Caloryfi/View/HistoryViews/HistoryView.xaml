@@ -3,10 +3,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Caloryfi.View.HistoryViews.HistoryView"
              Title="HistoryView">
-    <VerticalStackLayout>
-        <Label 
-            Text="history placeholder"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ImageButton Source="leftarrow_g.png"
+                         HeightRequest="50"/>
+            <DatePicker Grid.Column="1"
+                        VerticalOptions="Center" HorizontalOptions="Center"
+                        FontSize="30"/>
+            <ImageButton Grid.Column="2"
+                         Source="rightarrow_g.png"
+                         HeightRequest="50"/>
+        </Grid>
+        
+        
+        <!-- Meal list -->
+        <ScrollView Grid.Row="2">
+            
+        </ScrollView>
+
+
+        <!-- Makro display !-->
+        <Border Grid.Row="2"
+        BackgroundColor="{StaticResource SecondaryColor}"
+        StrokeShape="RoundRectangle 30" StrokeThickness="0"
+        Margin="0,0,0,-30" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="Kcal"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding TotalCaloriesForToday, StringFormat='{0}/'}"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding UserSettings.Kcal}"/>
+                <Label Grid.Row="0" Grid.Column="1"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="Prot"/>
+                <Label Grid.Row="1" Grid.Column="1"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding TotalProteinsForToday, StringFormat='{0}/'}"/>
+                <Label Grid.Row="2" Grid.Column="1"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding MaxFatsnForToday, StringFormat='{0}g'}"/>
+                <Label Grid.Row="0" Grid.Column="2"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="Carbs"/>
+                <Label Grid.Row="1" Grid.Column="2"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding TotalCarbsForToday, StringFormat='{0}/'}"/>
+                <Label Grid.Row="2" Grid.Column="2"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding MaxCarbsForToday, StringFormat='{0}g'}"/>
+                <Label Grid.Row="0" Grid.Column="4"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="Fats"/>
+                <Label Grid.Row="1" Grid.Column="4"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding TotalFatsForToday, StringFormat='{0}/'}"/>
+                <Label Grid.Row="2" Grid.Column="4"
+                       Style="{StaticResource Header}" TextColor="{StaticResource SecondaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       Text="{Binding MaxFatsnForToday, StringFormat='{0}g'}"/>
+
+            </Grid>
+        </Border>
+
+        <!-- Loading screen !-->
+        <Border Grid.Row="1" Grid.RowSpan="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+            <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+        <!-- Error screen-->
+        <Border Grid.Row="1" Grid.RowSpan="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding ErrorMessageVisible}" Padding="20">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="no_connection_icon.png" 
+                       HeightRequest="100"
+                       Aspect="AspectFit"
+                       Margin="0"/>
+                <Label Style="{StaticResource Big}" Text="Error ocurded while loading meals."
+                        HorizontalOptions="Center"
+                        />
+                <Label Style="{StaticResource Medium}" Text="Check your internet connection and reload app."
+                        HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </ContentPage>
