@@ -15,8 +15,8 @@ namespace Caloryfi
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            //var loginView = _serviceProvider.GetRequiredService<LoginView>();
-            var loginView = _serviceProvider.GetRequiredService<HistoryView>();
+            var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            //var loginView = _serviceProvider.GetRequiredService<HistoryView>();
             return new Window(loginView);
         }
     }

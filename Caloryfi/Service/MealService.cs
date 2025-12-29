@@ -35,6 +35,22 @@ namespace Caloryfi.Service
             }
         }
 
+        public async Task<(bool success, string message)> GetMealByDate( DateTime date)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"/api/MealList/GetMeals?date={date:yyyy-MM-dd}");
+                if (!response.IsSuccessStatusCode)
+                    return (false, "Failed to fetch meals for today");
+                var result = await response.Content.ReadAsStringAsync();
+                return (true, result);
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Error: {ex.Message}");
+            }
+        }
+
         public async Task<(bool succes, string message)> AddNewMealAsync()
         {
             try
