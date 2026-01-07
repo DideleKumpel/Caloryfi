@@ -21,7 +21,7 @@ namespace Caloryfi
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             {
-                var apiBaseUrl = "https://2d7de9a6300a.ngrok-free.app";
+                var apiBaseUrl = "https://55f23427159d.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {
@@ -53,6 +53,7 @@ namespace Caloryfi
             builder.Services.AddTransient<View.LoginView>();
             builder.Services.AddTransient<View.RegisterAccountView>();
             builder.Services.AddTransient<View.HistoryViews.HistoryView>();
+            builder.Services.AddTransient<View.HistoryViews.HistoryMealDetailView>();
             builder.Services.AddTransient<View.ProfileViews.ProfileView>();
             builder.Services.AddTransient<View.ProfileViews.SettingsView>();
             builder.Services.AddTransient<View.YourDayViews.YourDayView>();
@@ -66,6 +67,7 @@ namespace Caloryfi
             builder.Services.AddTransient<ViewModel.LoginViewModel>();
             builder.Services.AddTransient<ViewModel.RegisterAccountViewModel>();
             builder.Services.AddTransient<ViewModel.HistoryViewModels.HistoryViewModel>();
+            builder.Services.AddTransient<ViewModel.HistoryViewModels.HistoryMealDetailViewModel>();
             builder.Services.AddTransient<ViewModel.ProfileViewModels.ProfileViewModel>();
             builder.Services.AddTransient<ViewModel.ProfileViewModels.SettingsViewModel>();
             builder.Services.AddTransient<ViewModel.YourDayViewModels.YourDayViewModel>();

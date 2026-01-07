@@ -80,6 +80,11 @@ namespace Caloryfi.ViewModel.HistoryViewModels
             }
         }
 
+        partial void OnSelectedDateChanged(DateTime oldValue, DateTime newValue)
+        {
+            LoadMealsForSelectedDate();
+        }
+
         [RelayCommand]
         private async Task PreviousDate()
         {
@@ -109,6 +114,15 @@ namespace Caloryfi.ViewModel.HistoryViewModels
             TotalProteinsForToday = MealsList.Sum(meal => meal.Proteins);
             TotalCarbsForToday = MealsList.Sum(meal => meal.Carbs);
             TotalFatsForToday = MealsList.Sum(meal => meal.Fats);
+        }
+
+        [RelayCommand]
+        private async Task SwitchToHsitoryMealDetails(MealModel selcetedMeal)
+        {
+            await Shell.Current.GoToAsync(nameof(View.HistoryViews.HistoryMealDetailView), new Dictionary<string, object>
+            {
+                { "CurrentMealModel", selcetedMeal}
+            });
         }
     }
 }

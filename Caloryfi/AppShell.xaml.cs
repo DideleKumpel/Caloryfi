@@ -1,4 +1,5 @@
-﻿using Caloryfi.View.ProfileViews;
+﻿using Caloryfi.View.HistoryViews;
+using Caloryfi.View.ProfileViews;
 using Caloryfi.View.YourDayViews;
 
 namespace Caloryfi
@@ -14,6 +15,7 @@ namespace Caloryfi
             Routing.RegisterRoute(nameof(AddFoodView), typeof(AddFoodView));
             Routing.RegisterRoute(nameof(AddCustomIngredientView), typeof(AddCustomIngredientView));
             Routing.RegisterRoute(nameof(MealPictureView), typeof(MealPictureView));
+            Routing.RegisterRoute(nameof(HistoryMealDetailView), typeof(HistoryMealDetailView));
         }
     }
 }
