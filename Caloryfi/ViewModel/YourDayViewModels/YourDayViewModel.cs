@@ -149,7 +149,12 @@ namespace Caloryfi.ViewModel.YourDayViewModels
             CalculateTotals();
         }
 
-        private void CalculateTotals()
+        partial void OnMealsListChanged(ObservableCollection<MealModel> value)
+        {
+            CalculateTotals();
+        }
+
+        public void CalculateTotals()
         {
             TotalCaloriesForToday = MealsList.Sum(meal => meal.Calories);
             TotalProteinsForToday = MealsList.Sum(meal => meal.Proteins);
