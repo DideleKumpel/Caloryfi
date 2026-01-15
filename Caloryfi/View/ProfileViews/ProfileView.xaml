@@ -4,8 +4,7 @@
              x:Class="Caloryfi.View.ProfileViews.ProfileView"
              xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel.ProfileViewModels"
              x:DataType="viewmodel:ProfileViewModel"
-             Background="{StaticResource BackgroundColor}"
-             Title="ProfileView">
+             Title="PROFILE">
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20">
 
@@ -28,7 +27,7 @@
 
                 <Border Padding="5" Margin="0,0,0,20" Grid.Row="3"
                         WidthRequest="100"
-                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="8"
+                    Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 30" StrokeThickness="6"
                     Background="{StaticResource BackgroundColor}">
                     <Entry PlaceholderColor="{StaticResource TextColor}"
                         Text="{Binding CurrentWeight}" TextColor="{StaticResource TextColor}" FontSize="16" Keyboard="Numeric"

@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:Caloryfi.ViewModel"
              x:DataType="viewmodel:LoginViewModel"
              Background="{StaticResource BackgroundColor}"
-             Title="LoginView">
+             Title="LOGIN">
         <Grid>
             <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
                 <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">

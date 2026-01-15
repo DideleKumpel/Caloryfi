@@ -7,6 +7,7 @@
         <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
         <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}"/>
         <Setter Property="CornerRadius" Value="17"/>
+        <Setter Property="BorderWidth" Value="6" />
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Padding" Value="30,15"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -29,7 +30,7 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="CornerRadius" Value="17"/>
-        <Setter Property="BorderWidth" Value="8" />
+        <Setter Property="BorderWidth" Value="6" />
         <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -54,7 +55,7 @@
         <Setter Property="TextColor" Value="{StaticResource DangerColor}"/>
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="CornerRadius" Value="17"/>
-        <Setter Property="BorderWidth" Value="8" />
+        <Setter Property="BorderWidth" Value="6" />
         <Setter Property="BorderColor" Value="{StaticResource DangerColor}"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -78,6 +79,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BorderWidth" Value="6" />
     </Style>
 
     <Style x:Key="TextBtnPrimaryColor" TargetType="Button">

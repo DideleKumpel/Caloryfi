@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
              xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:MealDetailsViewModel"
-             Title="Meal details">
+             Title="MEAL DETAILS">
     <Grid>
         <ScrollView>
             <CollectionView 

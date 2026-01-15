@@ -25,11 +25,11 @@
             </Border>
             <HorizontalStackLayout Margin="0,20,0,0" HorizontalOptions="Center" Spacing="15">
                 <Button Text="Yes"
-                    Style="{StaticResource  DangerButton}"
+                    Style="{StaticResource  MainButton}"
                         Clicked="BtnYesClicked"
                      />
                 <Button Text="No"
-                    Style="{StaticResource MainButton}"
+                    Style="{StaticResource DangerButton}"
                         Clicked="BtnNoClicked"
                     />
             </HorizontalStackLayout>

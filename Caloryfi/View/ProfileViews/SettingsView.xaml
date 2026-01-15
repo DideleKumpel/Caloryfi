@@ -223,7 +223,7 @@
 
             </Grid>
 
-            <Button Style="{StaticResource DangerButton}"
+            <Button Style="{StaticResource MainButton}"
                     Text="Save"
                     Command="{Binding SaveSettingsCommand}"/>
             <Label Style="{StaticResource Warning}"  HorizontalTextAlignment="Center"

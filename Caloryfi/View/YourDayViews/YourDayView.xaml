@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:Caloryfi.ViewModel.YourDayViewModels"
              xmlns:model="clr-namespace:Caloryfi.Model"
              x:DataType="viewmodels:YourDayViewModel"
-             Title="Your Day">
+             Title="YOUR DAY">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -36,10 +36,12 @@
 
                                     <Button Style="{StaticResource MainButton}" Margin="0,0,0,20"
                                         Text="Details"
+                                        WidthRequest="150"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=SwitchToMealDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
                                     <Button Style="{StaticResource DangerButton}" Grid.Column="1" Margin="0,0,0,20"
                                             Text="Delete"
+                                            WidthRequest="150"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:YourDayViewModel}}, Path=DeleteMealCommand}"
                                             CommandParameter="{Binding .}"/>
                                     <Label Style="{StaticResource Big}" Grid.Column="0" Grid.Row="1"

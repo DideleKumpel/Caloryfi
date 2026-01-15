@@ -35,7 +35,7 @@
                 <Border Padding="5" Margin="0,0,0,20"
                 Stroke="{StaticResource PrimaryColor}" StrokeShape="RoundRectangle 15" StrokeThickness="8"
                 Background="{StaticResource BackgroundColor}">
-                <Button Text="TAKE PICTURE OF MEAL"
+                <Button Text="TAKE PICTURE OF A MEAL"
                         Style="{StaticResource TextBtn}"
                         Command="{Binding GoToMealPictureCommand}"
                         LineBreakMode="WordWrap"
