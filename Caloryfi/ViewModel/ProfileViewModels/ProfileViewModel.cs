@@ -38,7 +38,8 @@ namespace Caloryfi.ViewModel.ProfileViewModels
         [RelayCommand]
         private void Logout()
         {
-
+            SecureStorage.RemoveAll();
+            Application.Current.MainPage = _service.GetRequiredService<Caloryfi.View.LoginView>();
         }
 
         [RelayCommand]

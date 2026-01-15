@@ -8,15 +8,6 @@
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20">
 
-            <Label Text="WEIGHT GRAPH" Style="{StaticResource Header}" HorizontalOptions="Center" />
-
-            <Border Stroke="{StaticResource TextColor}"
-                    StrokeThickness="3"
-                    HeightRequest="250"
-                    HorizontalOptions="Fill">
-                <Label Text="*GRAPH HERE*" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{StaticResource TextColor}" />
-            </Border>
-
             <Label Text="ACTUAL WEIGHT" Style="{StaticResource Big}" FontAttributes="Bold" />
 
             <Grid>
